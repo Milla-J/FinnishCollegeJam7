@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class InstrumentHolder : MonoBehaviour
 {
-    [SerializeField] private Instrument _AssociatedInstrument;
     [SerializeField] private CursorBehaviour _CursorBehaviour;
-    private void OnMouseDown()
-    {
-        _CursorBehaviour.HandleInstrumentChoose(_AssociatedInstrument);
-    }
+    [SerializeField] private Instrument _AssociatedInstrument;
+
+    //Getters
+    public Instrument AssociatedInstrument => _AssociatedInstrument; 
+
+
+
+    //private void OnMouseDown()
+    //{
+    //    _CursorBehaviour.HandleInstrumentChoose(_AssociatedInstrument);
+    //}
 }
