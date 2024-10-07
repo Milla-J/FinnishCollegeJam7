@@ -4,60 +4,41 @@ using UnityEngine;
 
 public class CursorBehaviour : MonoBehaviour
 {
-    public Instrument instrument;
-
-    [SerializeField] private LayerMask _interactableLayer;
+    public Instrument _CurrentInstrument { get; private set; }
 
 
-    private bool _holdingInstrument = false;
-
-    private void Awake()
+    //Cursor public methods
+    public void HandleInstrumentChoose(Instrument instrument)
     {
-
-    }
-
-    private void Update()
-    {
-        if (_holdingInstrument)
-            return;
-
-        if(Input.GetMouseButtonDown(0)) //If mouse left clicked
+        if(_CurrentInstrument != null && _CurrentInstrument != instrument)
         {
-            Debug.Log(" left clicked");
-            TryToDetectInstrument();
+            DropCurrentInstrument();
+            PickUpNewInstrument(instrument);
+        }
+        else if(_CurrentInstrument == instrument)
+        {
+            DropCurrentInstrument();
+        }
+        else // If no instrument in hand
+        {
+            PickUpNewInstrument(instrument); 
         }
     }
 
     //Cursor private methods
-    /// <summary>
-    /// Shooting raycast and trying to get an instrument
-    /// </summary>
-    private void TryToDetectInstrument()
+    private void PickUpNewInstrument(Instrument instrument)
     {
-        var mousePos = Input.mousePosition;
-        Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        ray.direction *= 100f; // making ray longer
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
-        {
-            try
-            {
-                Debug.Log("GOT!");
-                hitInfo.transform.GetComponent<Instrument>().Take();
-            }
-            catch
-            {
-                Debug.LogWarning("Can't get Instrument component from " + hitInfo.transform.name);
-            }
-        }
-    }
-
-
-
-    private void TakeInstrument(Instrument instrument)
-    {
-        Cursor.visible = false;
-        instrument.Take();
+        _CurrentInstrument = instrument;
+        _CurrentInstrument.Activate();
         Debug.Log("Took instrument");
-    }
+        Cursor.visible = false;
 
+    }
+    private void DropCurrentInstrument()
+    {
+        _CurrentInstrument.Deactivate();
+        _CurrentInstrument = null;
+        Debug.Log("Drop instrument");
+        Cursor.visible = true;
+    }
 }
