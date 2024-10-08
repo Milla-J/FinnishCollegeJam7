@@ -10,7 +10,7 @@ public class StoryScene : ScriptableObject
     [System.Serializable]
     public class Sentence
     {
-        public string Text;
         public string Speaker;
+        public string Text;
     }
 }

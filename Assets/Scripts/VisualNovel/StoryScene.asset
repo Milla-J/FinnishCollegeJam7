@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: StoryScene
   m_EditorClassIdentifier: 
   Sentences:
-  - Text: AAA
-    Speaker: Hello, hello
-  - Text: BBB
-    Speaker: K thx buy
+  - Speaker: 'Rayan '
+    Text: Hello, hello! Can I take a pen?Hello, hello! Can I take a pen?Hello, hello!
+      Can I take a pen?
+  - Speaker: Rayan
+    Text: K thx bye

@@ -6,8 +6,10 @@ public class VisualNovelTesting : MonoBehaviour
 {
     public StoryScenesController scenesController;
     public StoryScene storyScene;
-    void Start()
+
+    private void Start()
     {
         scenesController.PlayScene(storyScene);
     }
+
 }
