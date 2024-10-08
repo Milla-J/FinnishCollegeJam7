@@ -63,7 +63,7 @@ public class CursorBehaviour : MonoBehaviour
         _CurrentInstrument = instrument;
         _CurrentInstrument.Activate();
         Debug.Log("Took instrument");
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
     }
     private void DropCurrentInstrument()
@@ -71,6 +71,6 @@ public class CursorBehaviour : MonoBehaviour
         _CurrentInstrument.Deactivate();
         _CurrentInstrument = null;
         Debug.Log("Drop instrument");
-        Cursor.visible = true;
+        //Cursor.visible = true;
     }
 }

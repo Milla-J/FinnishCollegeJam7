@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bde34d5025aef64a9b7840ef6ef45c6, type: 3}
   m_Name: InstrumentsCommonInfo
   m_EditorClassIdentifier: 
-  RotationStrenght: 50
+  RotationStrenght: 150

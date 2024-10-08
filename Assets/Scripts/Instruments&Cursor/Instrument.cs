@@ -5,20 +5,26 @@ using UnityEngine;
 public abstract class Instrument : MonoBehaviour
 {
     [SerializeField] protected InstrumentsInfo _Info;
+    protected Camera _MainCamera;
 
+    //Components
     protected Transform _InstrumentTransform;
-    protected Rigidbody2D _rb;
+    protected TargetJoint2D _targetJoint2D;
+
     protected bool _IsActive;
     protected Vector3 _zAxis = new Vector3(0, 0, 1);
+    protected float _RotationT; // t for rotation lerp
 
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _MainCamera = Camera.main;
         _InstrumentTransform = GetComponent<Transform>();
+        _targetJoint2D = GetComponent<TargetJoint2D>();
         gameObject.SetActive(false);
         _IsActive = false;
     }
+
     protected void FixedUpdate()
     {
         if (!_IsActive)
@@ -26,6 +32,13 @@ public abstract class Instrument : MonoBehaviour
 
         FollowCursor();
         Rotate();
+    }
+
+    void OnJointBreak2D(Joint2D brokenJoint)
+    {
+        Debug.LogWarning("Joint2D is broke!!! Regenerating...");
+        Destroy(_targetJoint2D);
+        _targetJoint2D = gameObject.AddComponent<TargetJoint2D>();
     }
 
     //Object's public methods
@@ -44,15 +57,15 @@ public abstract class Instrument : MonoBehaviour
     private void FollowCursor()
     {
         var mousePos = Input.mousePosition;
-        var worldPos = new Vector2(Camera.main.ScreenToWorldPoint(mousePos).x, Camera.main.ScreenToWorldPoint(mousePos).y);
-        //var newPos = Vector2.Lerp(_InstrumentTransform.position, worldPos, Time.deltaTime);
-        //_InstrumentTransform.position = newPos;
-        _rb.MovePosition(worldPos);
+        var worldPos = new Vector2(_MainCamera.ScreenToWorldPoint(mousePos).x, _MainCamera.ScreenToWorldPoint(mousePos).y);
+        _targetJoint2D.target = worldPos;
     }
 
     private void Rotate()
     {
         var degrees = Input.GetAxis("Mouse ScrollWheel") * _Info.RotationStrenght;
-        _InstrumentTransform.Rotate(_zAxis, degrees);
+        Quaternion targetRotation = _InstrumentTransform.rotation * Quaternion.Euler(0, 0, degrees);
+
+       _InstrumentTransform.Rotate(_zAxis, degrees);
     }
 }
