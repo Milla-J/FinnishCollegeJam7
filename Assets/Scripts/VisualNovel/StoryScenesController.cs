@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public class StoryScenesController : MonoBehaviour
 {
@@ -10,67 +8,62 @@ public class StoryScenesController : MonoBehaviour
     [SerializeField] private float _timeAfterSentence;
     [SerializeField] private TMP_Text _Text;
     [SerializeField] private TMP_Text _Speaker;
-    private StoryScene _CurrentStory;
+    private StoryScene _currentScene;
 
-    private State _CurrentStoryState;
-    private State _CurruntSentanceStage;
+    private State _SentanceState;
 
-    private int _SentenceIndex;
+    private int _sentenceIndex;
 
-    private void Awake()
+    // Public methods
+
+    public void PlayScene(StoryScene scene)
     {
-        _CurruntSentanceStage = State.Completed;
+        StartCoroutine(PlaySceneCoroutine(scene));
     }
 
+    // Private methods
+    private IEnumerator PlaySceneCoroutine(StoryScene scene)
+    {
+        _currentScene = scene;
+        _sentenceIndex = -1;
+
+        while (true)
+        {
+            if (_SentanceState == State.Playing)
+                continue;
+
+            if (++_sentenceIndex == scene.Sentences.Count)
+                yield break;
+
+            _Speaker.text = _currentScene.Sentences[_sentenceIndex].Speaker;
+            TypeText(_currentScene.Sentences[_sentenceIndex].Text);
+            yield return null;
+        }
+    }
+
+    private IEnumerator TypeText(string text)
+    {
+        Debug.Log("Typing...");
+
+        _SentanceState = State.Playing;
+        _Text.text = "";
+        int wordIndex = 0;
+
+        while (_SentanceState != State.Completed)
+        {
+            _Text.text += text[wordIndex];
+            yield return new WaitForSeconds(_symbolsTypingSpeed);
+            if (++wordIndex == text.Length)
+            {
+                _SentanceState = State.Completed;
+                break;
+            }
+        }
+    }
 
     enum State
     {
         Playing,
         Completed
     }
-
-    // Public methods
-
-
-    public void PlayStoryScene(StoryScene storyScene)
-    {
-        StartCoroutine(PlayStoryCourutine(storyScene));
-    }
-
-    private IEnumerator PlayStoryCourutine(StoryScene storyScene)
-    {
-        _CurrentStory = storyScene;
-        _SentenceIndex = -1;
-
-        while (_CurrentStory.Sentences.Count > _SentenceIndex)
-        {
-            if (_CurruntSentanceStage == State.Playing)
-                continue;
-
-            ++_SentenceIndex;
-            TypeText(_CurrentStory.Sentences[_SentenceIndex].Text);
-            _Speaker.text = _CurrentStory.Sentences[_SentenceIndex].Speaker;
-            yield return null;
-        }
-    }
-
-    // Private methods
-    private IEnumerator TypeText(string text)
-    {
-        _Text.text = "";
-        _CurruntSentanceStage = State.Playing;
-        
-        for(int i = 0; i < text.Length; i++)
-        {
-            _Text.text += text[i];
-            yield return new WaitForSeconds(_symbolsTypingSpeed);
-
-            if(_CurruntSentanceStage == State.Completed)
-                yield break;
-        }
-
-        yield return new WaitForSeconds(_timeAfterSentence);
-        _CurruntSentanceStage = State.Completed;
-    }
-
 }

@@ -8,6 +8,6 @@ public class VisualNovelTesting : MonoBehaviour
     public StoryScene storyScene;
     void Start()
     {
-        scenesController.PlayStoryScene(storyScene);
+        scenesController.PlayScene(storyScene);
     }
 }

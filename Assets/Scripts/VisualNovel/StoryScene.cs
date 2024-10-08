@@ -8,7 +8,7 @@ public class StoryScene : ScriptableObject
     public List<Sentence> Sentences;
 
     [System.Serializable]
-    public struct Sentence
+    public class Sentence
     {
         public string Text;
         public string Speaker;
