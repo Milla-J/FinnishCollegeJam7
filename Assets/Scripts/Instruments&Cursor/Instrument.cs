@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Instrument : MonoBehaviour
+public abstract class Instrument : MonoBehaviour
 {
-    [SerializeField] private InstrumentsInfo _Info;
+    [SerializeField] protected InstrumentsInfo _Info;
 
-    private Transform _InstrumentTransform;
-    private bool _IsActive;
-    private Vector3 _zAxis = new Vector3(0, 0, 1);
+    protected Transform _InstrumentTransform;
+    protected bool _IsActive;
+    protected Vector3 _zAxis = new Vector3(0, 0, 1);
 
 
     private void Awake()
