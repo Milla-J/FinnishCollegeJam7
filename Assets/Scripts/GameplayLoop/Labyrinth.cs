@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -6,6 +7,7 @@ using UnityEngine;
 public class Labyrinth: MonoBehaviour
 {
     public bool IsInUse;
+    public event Action<Labyrinth> OnCeasedToBeUsed;
     [SerializeField] private List<Transform> possibleProblemPlaces;
     [SerializeField] private List<Problem> PossibleProblems;
 
@@ -24,14 +26,22 @@ public class Labyrinth: MonoBehaviour
         
         foreach(Transform t in places)
         {
-            int random = Random.Range(0, places.Count);
+            int random = UnityEngine.Random.Range(0, places.Count);
             PossibleProblems[random].transform.position = t.position;
         }
     }
 
+    /// <summary>
+    /// Should be called from robot when it stops using this Labyrinth
+    /// </summary>
+    public void RemoveFromUse()
+    {
+        OnCeasedToBeUsed?.Invoke(this);
+    }
+
     public static int GetRandomIndex<T>(List<T> list)
     {
-        var random = Random.Range(0, list.Count);
+        var random = UnityEngine.Random.Range(0, list.Count);
         return random;
     }
 }

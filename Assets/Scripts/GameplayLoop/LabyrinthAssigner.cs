@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using System.Linq;
 
-enum DifficultyLevels
+public enum DifficultyLevels
 {
     Easy,
     Normal,
@@ -15,6 +17,43 @@ public class LabyrinthAssigner : MonoBehaviour
     [SerializeField] private int easyProblemsAmount;
 
     bool _isLabyrinthFound;
+
+    private System.Random rng = new(); // used for shuffling lists
+
+    public Labyrinth GetAvailableLabyrinth(DifficultyLevels difficulty)
+    {
+        switch (difficulty)
+        {
+            case DifficultyLevels.Easy:
+                ShuffleList(easyLabyrinths); //Shuffling for randomness
+                foreach (var labyr in easyLabyrinths)
+                {
+                    if(labyr.IsInUse == false)
+                    {
+                        labyr.UpdateProblems(easyProblemsAmount);
+                        labyr.IsInUse = true;
+                        labyr.OnCeasedToBeUsed += RestoreUse;
+                        return labyr;
+                    }
+                }
+                return null;
+        }
+        return null;
+    }
+
+    private void RestoreUse(Labyrinth labyrinth)
+    {
+        if (easyLabyrinths.Contains(labyrinth))
+        {
+            labyrinth.IsInUse = true;
+            Debug.Log("Labyrinth in use again!!! HOORAY");
+        }
+    }
+
+    private void ShuffleList(List<Labyrinth> list) 
+    {
+        var shuffledcards = list.OrderBy(_ => rng.Next()).ToList();
+    }
 
     //public IEnumerator GetAvailableLabyrinth(DifficultyLevels difficulty, ref Labyrinth labyrinth)
     //{

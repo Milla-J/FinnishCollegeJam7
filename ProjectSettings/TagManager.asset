@@ -9,6 +9,7 @@ TagManager:
   - Brush
   - Tape
   - Crack
+  - RobotExit
   layers:
   - Default
   - TransparentFX
