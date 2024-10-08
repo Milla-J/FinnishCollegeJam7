@@ -16,28 +16,28 @@ public class LabyrinthAssigner : MonoBehaviour
 
     bool _isLabyrinthFound;
 
-    public IEnumerator GetAvailableLabyrinth(DifficultyLevels difficulty, ref Labyrinth labyrinth)
-    {
-        labyrinth = null;
+    //public IEnumerator GetAvailableLabyrinth(DifficultyLevels difficulty, ref Labyrinth labyrinth)
+    //{
+    //    labyrinth = null;
 
-        switch(difficulty)
-        {
-            case DifficultyLevels.Easy:
-                var random = Labyrinth.GetRandomIndex(easyLabyrinths);
-                labyrinth = easyLabyrinths[random];
-                labyrinth.UpdateProblems(easyProblemsAmount);
-                labyrinth.IsInUse = true;
-                yield break;
-            default:
-                yield break;
+    //    switch(difficulty)
+    //    {
+    //        case DifficultyLevels.Easy:
+    //            var random = Labyrinth.GetRandomIndex(easyLabyrinths);
+    //            labyrinth = easyLabyrinths[random];
+    //            labyrinth.UpdateProblems(easyProblemsAmount);
+    //            labyrinth.IsInUse = true;
+    //            yield break;
+    //        default:
+    //            yield break;
 
-        }
-    }
+    //    }
+    //}
 
-    private Labyrinth GetLabyrinth()
-    {
+    //private Labyrinth GetLabyrinth()
+    //{
 
-    }
+    //}
     //private IEnumerator DigForlabyrinth()
     //{
     //    while (true)
