@@ -10,6 +10,8 @@ TagManager:
   - Tape
   - Crack
   - RobotExit
+  - Wires
+  - Bump
   layers:
   - Default
   - TransparentFX

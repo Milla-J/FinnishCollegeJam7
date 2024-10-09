@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 
-public class InstrumentCollisionDetection : MonoBehaviour
+public class InstrumentCollisionDetection : Instrument
 {
     public GameManager gameManager;
 
