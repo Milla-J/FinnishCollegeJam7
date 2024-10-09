@@ -30,17 +30,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OpenPopup(Labyrinth labyrinthToShow)
-    {
-        if (!popupOpen)
-        {
-            popup.SetActive(true);
-            popupOpen = true;
-            labyrinthToShow.gameObject.SetActive(true);
-            //add any cool visual effects
-        }
-    }
-
     public void StopLowerSatisfaction()
     {
         Debug.Log("Stopping coroutine");

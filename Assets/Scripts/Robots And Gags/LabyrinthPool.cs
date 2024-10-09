@@ -4,17 +4,17 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using System.Linq;
 
-public class LabyrinthPuller : MonoBehaviour
+public class LabyrinthPool : MonoBehaviour
 {
-    [SerializeField] private GameplayLoopManager _GameplayLoopManager;
+    [SerializeField] private GameplayLoopController _GameplayLoopManager;
 
-    [SerializeField] private List<Labyrinth> _EasyLabyrinths;
+    [SerializeField] private List<Labyrinth> _EasyPool;
     [SerializeField] private int _EasyProblemsAmount;
 
-    [SerializeField] private List<Labyrinth> _NormalLabyrinths;
+    [SerializeField] private List<Labyrinth> _NormalPool;
     [SerializeField] private int _NormalProblemsAmount;
 
-    [SerializeField] private List<Labyrinth> _HardLabyrinths;
+    [SerializeField] private List<Labyrinth> _HardPool;
     [SerializeField] private int _HardProblemsAmount;
 
     bool _isLabyrinthFound;
@@ -24,9 +24,9 @@ public class LabyrinthPuller : MonoBehaviour
         switch (_GameplayLoopManager.DifficultyLevel)
         {
             case DifficultyLevels.Easy:
-                UsefulStuff.ShuffleList(_EasyLabyrinths); //Shuffling for randomness
+                UsefulStuff.ShuffleList(_EasyPool); //Shuffling for randomness
 
-                foreach (var labyr in _EasyLabyrinths)
+                foreach (var labyr in _EasyPool)
                 {
                     if(labyr.IsInUse == false)
                     {
@@ -39,9 +39,9 @@ public class LabyrinthPuller : MonoBehaviour
                 return null;
 
             case DifficultyLevels.Normal:
-                UsefulStuff.ShuffleList(_EasyLabyrinths); //Shuffling for randomness
+                UsefulStuff.ShuffleList(_EasyPool); //Shuffling for randomness
 
-                foreach (var labyr in _NormalLabyrinths)
+                foreach (var labyr in _NormalPool)
                 {
                     if (labyr.IsInUse == false)
                     {
@@ -54,9 +54,9 @@ public class LabyrinthPuller : MonoBehaviour
                 return null;
 
             case DifficultyLevels.Hard:
-                UsefulStuff.ShuffleList(_HardLabyrinths); //Shuffling for randomness
+                UsefulStuff.ShuffleList(_HardPool); //Shuffling for randomness
 
-                foreach (var labyr in _HardLabyrinths)
+                foreach (var labyr in _HardPool)
                 {
                     if (labyr.IsInUse == false)
                     {
@@ -73,14 +73,7 @@ public class LabyrinthPuller : MonoBehaviour
 
     private void RestoreUse(Labyrinth labyrinth)
     {
-        if (_EasyLabyrinths.Contains(labyrinth))
-        {
-            labyrinth.IsInUse = true;
-            Debug.Log("Labyrinth in use again!!! HOORAY");
-        }
-        else
-        {
-            Debug.LogWarning("Labyrinth mistaaake!!");
-        }
+         labyrinth.IsInUse = true;
+         Debug.Log("Labyrinth in use again!!! HOORAY");
     }
 }

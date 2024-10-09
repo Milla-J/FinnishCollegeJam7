@@ -14,6 +14,7 @@ TagManager:
   - Bump
   - Glue
   - Hammer
+  - Robot
   layers:
   - Default
   - TransparentFX

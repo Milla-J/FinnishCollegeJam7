@@ -10,7 +10,7 @@ public enum DifficultyLevels
     Hard
 }
 
-public class GameplayLoopManager : MonoBehaviour
+public class GameplayLoopController : MonoBehaviour
 {
     public DifficultyLevels DifficultyLevel { get; private set; }
 
@@ -34,7 +34,7 @@ public class GameplayLoopManager : MonoBehaviour
 
 
     [Header("Pullers")]
-    [SerializeField] private RobotsPuller _RobotsPuller;
+    [SerializeField] private RobotsPool _RobotsPool;
     [SerializeField] private GagsPuller _GagsPool;
 
     private float currentSpawnRate;
@@ -44,9 +44,6 @@ public class GameplayLoopManager : MonoBehaviour
     private bool passedEasyMode = false;
     private bool passedNormalMode = false;
 
-    private List<Robot> robotsOnScene;
-    private Action<int> OnRobotsCountUpdated;
-
     ///Getters
     public float ConveyerSpeed { get; private set; } //Speed that is being shared 
 
@@ -54,9 +51,6 @@ public class GameplayLoopManager : MonoBehaviour
     {
         ConveyerSpeed = _EasyConveyerSpeed;
         currentSpawnRate = _EasySpawnRate;
-
-        robotsOnScene = new();
-        OnRobotsCountUpdated += TryToSwitchMode;
 
         IsThisFirstRun = true;
         gameStarted = true;
@@ -85,10 +79,9 @@ public class GameplayLoopManager : MonoBehaviour
     }
     private void SpawnRobot() //To-DO: remake to SpawnEntity()
     {
-        if(_RobotsPuller.TryToGetRobot(out Robot newRobot))
+        if(_RobotsPool.TryToGetRobot(out Robot newRobot))
         {
-            robotsOnScene.Add(newRobot);
-            OnRobotsCountUpdated?.Invoke(robotsOnScene.Count);
+            TryToSwitchMode(_RobotsPool.PoolCount);
             newRobot.StartConveyerWay();
         }
         else
@@ -99,19 +92,21 @@ public class GameplayLoopManager : MonoBehaviour
 
     private void TryToSwitchMode(int robotsCount)
     {
-        if(robotsCount == _EntitiesPassedBeforeNormal && !passedEasyMode)
+        if(_RobotsPool.PoolCount == _EntitiesPassedBeforeNormal && !passedEasyMode)
         {
-            DifficultyLevel = DifficultyLevels.Normal;
+            Debug.Log("Switched to Normal Mode");
 
             passedEasyMode = true;
+            DifficultyLevel = DifficultyLevels.Normal;
             ConveyerSpeed = _NormalConveyerSpeed;
             currentSpawnRate = _NormalSpawnRate;
         }
-        else if(robotsCount == _EntitiesPassedBeforeHard && !passedNormalMode)
+        else if(_RobotsPool.PoolCount == _EntitiesPassedBeforeHard && !passedNormalMode)
         {
-            DifficultyLevel = DifficultyLevels.Hard;
+            Debug.Log("Switched to Hard Mode");
 
             passedNormalMode = true;
+            DifficultyLevel = DifficultyLevels.Hard;
             ConveyerSpeed = _HardConveyerSpeed;
             currentSpawnRate = _HardSpawnRate;
         }
