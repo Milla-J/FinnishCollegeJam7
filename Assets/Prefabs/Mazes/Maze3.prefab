@@ -682,6 +682,7 @@ MonoBehaviour:
   - {fileID: 2577519461130682843, guid: 5e3e3fe783b871547b23d2ba6ce6d769, type: 3}
   - {fileID: 3516459252343469005, guid: 8c335fb97ce25534a9b25a5f64f3b3c7, type: 3}
   _ProblemsParent: {fileID: 8303341144807408908}
+  _colliders: {fileID: 1415404781329814883}
 --- !u!95 &3429794881109504928
 Animator:
   serializedVersion: 5
