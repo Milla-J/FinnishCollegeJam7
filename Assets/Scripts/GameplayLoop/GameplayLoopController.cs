@@ -37,6 +37,19 @@ public class GameplayLoopController : MonoBehaviour
     [SerializeField] private RobotsPool _RobotsPool;
     [SerializeField] private GagsPuller _GagsPool;
 
+    [Header("Ending The Game Conditions")]
+    [SerializeField] private int _robotsInGame;
+
+    [Header("Ending The Game Parameters")]
+    [SerializeField] private string _BestCompliment;
+    [SerializeField] private string _NormalCompliment;
+    [SerializeField] private string _WorstCompliment;
+
+
+    [Header("Robots Exit, Win and Lose Controllers")]
+    [SerializeField] private RobotsExit _robotsExit;
+    [SerializeField] private WinScreenController _winScreenController;
+
     private float currentSpawnRate;
 
     private bool gameStarted = false;
@@ -54,6 +67,10 @@ public class GameplayLoopController : MonoBehaviour
 
         IsThisFirstRun = true;
         gameStarted = true;
+
+        _RobotsPool.Initialize(_robotsInGame);
+        _robotsExit.SetEndingCondition(_robotsInGame);
+        _robotsExit.OnEndingConditionMet += EndGame;
 
         StartCoroutine(SpawnEntitiesCoroutine());
     }
@@ -112,9 +129,17 @@ public class GameplayLoopController : MonoBehaviour
         }
     }
 
-    private void CountScore()
+    private void EndGame()
+    {
+        StopAllCoroutines();
+        var score = CountScore();
+        _winScreenController.ShowWinScreen("Good", score.ToString());
+        Debug.Log("End game");
+    }
+
+    private int CountScore()
     {
         //Count score
-
+        return 0;
     }
 }
