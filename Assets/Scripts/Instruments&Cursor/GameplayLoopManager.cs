@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameplayLoopManager : MonoBehaviour
 {
@@ -10,28 +11,32 @@ public class GameplayLoopManager : MonoBehaviour
     [SerializeField] private float _EntitiesPassedBeforeNormal;
     [SerializeField] private float _EntitiesPassedBeforeHard;
 
+
     [Header("Difficulty parameters")]
     [SerializeField] private float _EasySpeed;
     [SerializeField] private float _NormalSpeed;
     [SerializeField] private float _HardSpeed;
-
     [SerializeField] private float _EasySpawnRate; //seconds between spawns
     [SerializeField] private float _NormalSpawnRate;
     [SerializeField] private float _HardSpawnRate;
-    private float currentSpawnRate;
 
     [SerializeField] private float _GagsSpawnChance;
+
 
     [Header("Pullers")]
     [SerializeField] private RobotsPuller _RobotsPuller;
     [SerializeField] private GagsPuller _GagsPuller;
 
-    bool gameStarted = false;
-
+    private float currentSpawnRate;
     //Timer and Timings
     private float timer;
+
+    private bool gameStarted = false;
     private bool passedEasyMode = false;
     private bool passedNormalMode = false;
+
+    private List<Robot> robotsOnScene;
+    private Action<int> OnRobotsCountUpdated;
 
     ///Getters
     public float Speed { get; private set; } //Speed ythat is being shared 
@@ -39,8 +44,12 @@ public class GameplayLoopManager : MonoBehaviour
 
     public void StartGame()
     {
+        Speed = _EasySpeed;
+        currentSpawnRate = _EasySpawnRate;
+
+        robotsOnScene = new();
+        OnRobotsCountUpdated += TryToSwitchMode;
         gameStarted = true;
-        SwitchToEasyMode();
     }
 
     private void Update()
@@ -53,14 +62,22 @@ public class GameplayLoopManager : MonoBehaviour
 
         //if( && !passedEasyMode)
     }
-
-    private void SpawnEntity()
+    IEnumerator SpawnEntity
+    private void SpawnRobot() //To-DO: remake to SpawnEntity()
     {
-        //Randomly dependinh on the chance spawn robot or gag
+        Robot newRobot = _RobotsPuller.PullRobot();
+        robotsOnScene.Add(newRobot);
+        OnRobotsCountUpdated?.Invoke(robotsOnScene.Count);
+        newRobot.StartConveyerWay();
     }
-    private void SwitchToEasyMode()
+
+    private void TryToSwitchMode(int robotsCount)
     {
-        Speed = _EasySpeed;
-        currentSpawnRate = _EasySpawnRate;
+        if(robotsCount == _EntitiesPassedBeforeNormal && !passedEasyMode)
+        {
+            passedEasyMode = true;
+            Speed = _NormalSpeed;
+            currentSpawnRate = _NormalSpawnRate;
+        }
     }
 }

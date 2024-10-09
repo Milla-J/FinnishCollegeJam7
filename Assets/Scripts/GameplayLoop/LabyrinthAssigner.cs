@@ -48,5 +48,9 @@ public class LabyrinthAssigner : MonoBehaviour
             labyrinth.IsInUse = true;
             Debug.Log("Labyrinth in use again!!! HOORAY");
         }
+        else
+        {
+            Debug.LogWarning("Labyrinth mistaaake!!");
+        }
     }
 }
