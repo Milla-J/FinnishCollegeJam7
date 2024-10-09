@@ -6,28 +6,37 @@ using UnityEngine;
 
 public class Labyrinth: MonoBehaviour
 {
-    public bool IsInUse;
+    [HideInInspector] public bool IsInUse;
+
     public event Action<Labyrinth> OnCeasedToBeUsed;
-    [SerializeField] private List<Transform> possibleProblemPlaces;
-    [SerializeField] private List<Problem> PossibleProblems;
+
+    [SerializeField] private List<ProblemPlace> _ProblemsPlaces;
+    [SerializeField] private List<Problem> _ProblemsPrefabs;
+    [SerializeField] private Transform _ProblemsParent;
+
+    private List<Problem> InstantiatedProblems = new();
 
     private Problem previousProblem;
     private int randomIndex;
 
     public void UpdateProblems(int problemsCount)
     {
-        List <Transform> places = new List <Transform>();
+        DeleteCurrentProblems();
+        UsefulStuff.ShuffleList(_ProblemsPlaces); //Shuffle places for randomness
 
-        for (int i = 0; i < problemsCount; i++)
+        for (int i = 0; i < problemsCount; i++)  // As much as problemsCount parameter
         {
-            GetRandomIndex(possibleProblemPlaces);
-            places.Add(possibleProblemPlaces[i]);
-        }
-        
-        foreach(Transform t in places)
-        {
-            int random = UnityEngine.Random.Range(0, places.Count);
-            PossibleProblems[random].transform.position = t.position;
+            foreach(var place in _ProblemsPlaces) 
+            {
+                if (!place.InUse) //Stops on an available place 
+                {
+                    place.InUse = true;
+                    var index = UsefulStuff.GetRandomIndex(_ProblemsPrefabs); //Chooses random problem
+                    Problem newProblem = Instantiate(_ProblemsPrefabs[index], place.transform.position, place.transform.rotation, _ProblemsParent);
+                    InstantiatedProblems.Add(newProblem);
+                    break;
+                }
+            }
         }
     }
 
@@ -39,9 +48,12 @@ public class Labyrinth: MonoBehaviour
         OnCeasedToBeUsed?.Invoke(this);
     }
 
-    public static int GetRandomIndex<T>(List<T> list)
+    private void DeleteCurrentProblems()
     {
-        var random = UnityEngine.Random.Range(0, list.Count);
-        return random;
+        foreach(var problem in InstantiatedProblems)
+        {
+            Destroy(problem.gameObject);
+        }
+        InstantiatedProblems.Clear();
     }
 }
