@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: e2bf7b6281743b34080d23da085773a0, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -545,9 +545,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd148f080742f9499aedfd9a62da037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsInUse: 0
   speed: 2
   start: {fileID: 571717580}
   end: {fileID: 1667059620}
+--- !u!1 &717062248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 717062250}
+  - component: {fileID: 717062249}
+  m_Layer: 0
+  m_Name: Gameplay Loop Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &717062249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717062248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 747fa25925a30674b929ca1d68e1f07a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _EntitiesPassedBeforeNormal: 0
+  _EntitiesPassedBeforeHard: 0
+  _EasySpeed: 0
+  _NormalSpeed: 0
+  _HardSpeed: 0
+  _EasySpawnRate: 0
+  _NormalSpawnRate: 0
+  _HardSpawnRate: 0
+  _GagsSpawnChance: 0
+  _RobotsPuller: {fileID: 0}
+  _GagsPuller: {fileID: 0}
+--- !u!4 &717062250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717062248}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.9501567, y: -0.9545639, z: 0.055303574}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &759664264
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,3 +2129,4 @@ SceneRoots:
   - {fileID: 1934774982}
   - {fileID: 2146325646}
   - {fileID: 794824500}
+  - {fileID: 717062250}
