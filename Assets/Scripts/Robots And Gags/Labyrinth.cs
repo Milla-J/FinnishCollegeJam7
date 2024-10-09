@@ -14,6 +14,7 @@ public class Labyrinth: MonoBehaviour
     [SerializeField] private List<ProblemPlace> _ProblemsPlaces;
     [SerializeField] private List<Problem> _ProblemsPrefabs;
     [SerializeField] private Transform _ProblemsParent;
+    [SerializeField] private GameObject _colliders;
 
     private List<Problem> InstantiatedProblems = new();
 
@@ -23,7 +24,11 @@ public class Labyrinth: MonoBehaviour
     private float _problemsAmount;
     public float FinalFactor { get; private set; } //Final completion factor
 
-    public void SetActiveTrue() => gameObject.SetActive(true);
+    public void SetActiveTrue()
+    {
+        _colliders.SetActive(true);
+        gameObject.SetActive(true);
+    }
     public void SetActiveFalse() => gameObject.SetActive(false);
 
     private void Awake()
@@ -35,11 +40,13 @@ public class Labyrinth: MonoBehaviour
     // Cool Visual Effects
     public void Show()
     {
+        _colliders.SetActive(true);
         gameObject.SetActive(true);
         _animator.SetTrigger("Appear");
     }
     public void Hide()
     {
+        _colliders.SetActive(false);
         _animator.SetTrigger("Dissapear");
     }
     // Cool Visual Effects
