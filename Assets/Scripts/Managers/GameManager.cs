@@ -13,12 +13,33 @@ public class GameManager : MonoBehaviour
 
     public bool fixing = false;
 
+    public GameObject GameOverPanel;
+
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         satisfaction = slider.value;
     }
 
+    void Update()
+    {
+        if (satisfaction <= 0)
+        {
+            GameOver();
+        }
+    }
+
+    public void OpenPopup(Labyrinth labyrinthToShow)
+    {
+        if (!popupOpen)
+        {
+            popup.SetActive(true);
+            popupOpen = true;
+            labyrinthToShow.gameObject.SetActive(true);
+            //add any cool visual effects
+        }
+    }
 
     public void StopLowerSatisfaction()
     {
@@ -48,5 +69,11 @@ public class GameManager : MonoBehaviour
             satisfaction += 0.2f;
             slider.value = satisfaction;
         }
+    }
+
+    private void GameOver()
+    {
+        Time.timeScale = 0;
+        GameOverPanel.SetActive(true);
     }
 }

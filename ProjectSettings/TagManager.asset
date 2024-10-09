@@ -10,6 +10,10 @@ TagManager:
   - Tape
   - Crack
   - RobotExit
+  - Wires
+  - Bump
+  - Glue
+  - Hammer
   layers:
   - Default
   - TransparentFX
@@ -19,7 +23,7 @@ TagManager:
   - UI
   - Interactable
   - Instrument
-  - Robot
+  - IgnoreInstrument
   - 
   - 
   - 

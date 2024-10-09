@@ -24,8 +24,15 @@ public class Problem : MonoBehaviour
         if (other.tag == targetTag)
         {
             Debug.Log("Fixed problem");
-            DisableCollider();
             ChangeSprite(Color.blue);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == targetTag)
+        {
+            DisableCollider();
         }
     }
 
