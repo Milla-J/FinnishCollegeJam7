@@ -111,4 +111,10 @@ public class GameplayLoopController : MonoBehaviour
             currentSpawnRate = _HardSpawnRate;
         }
     }
+
+    private void CountScore()
+    {
+        //Count score
+
+    }
 }
