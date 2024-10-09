@@ -40,6 +40,7 @@ public class GameplayLoopManager : MonoBehaviour
     private float currentSpawnRate;
 
     private bool gameStarted = false;
+    private bool IsThisFirstRun = false;
     private bool passedEasyMode = false;
     private bool passedNormalMode = false;
 
@@ -56,6 +57,8 @@ public class GameplayLoopManager : MonoBehaviour
 
         robotsOnScene = new();
         OnRobotsCountUpdated += TryToSwitchMode;
+
+        IsThisFirstRun = true;
         gameStarted = true;
 
         StartCoroutine(SpawnEntitiesCoroutine());
@@ -65,6 +68,13 @@ public class GameplayLoopManager : MonoBehaviour
     {
         while (true)
         {
+            if (IsThisFirstRun)
+            {
+                IsThisFirstRun = false;
+                SpawnRobot();
+                continue;
+            }
+
             yield return new WaitForSeconds(currentSpawnRate);
             SpawnRobot();
             if(!gameStarted)

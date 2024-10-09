@@ -14,7 +14,7 @@ public class RobotsPuller : MonoBehaviour
     [SerializeField] private Transform _ConveyerEndPoint;
 
 
-    private void Start()
+    private void Awake()
     {
         foreach (var robot in robotsObjects)
         {

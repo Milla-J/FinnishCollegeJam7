@@ -36,30 +36,31 @@ public class Robot : MonoBehaviour
         Debug.Log("Square clicked!");
         if (!_isLabyrinthAssigned)
         {
-            _AssosiatedLabyrinth = _Assigner.GetAvailableLabyrinth();
-            _isLabyrinthAssigned = true;
+            Debug.LogWarning("WAIT WHERE IS THE LABYRINTH >:(");
         }
         _PopUpManager.HandleLabyrinthPopUp(_AssosiatedLabyrinth);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("RobotExit"))
+        if (collision.gameObject.CompareTag("RobotExit"))
         {
-            Debug.Log("RobotExit");
             StopAllCoroutines();
             _AssosiatedLabyrinth.RemoveFromUse();
             _isLabyrinthAssigned = false;
             OnExitConveyer?.Invoke(this);
 
             gameObject.SetActive(false);
+            Debug.Log("RobotExit");
         }
     }
 
     public void StartConveyerWay()
     {
         gameObject.SetActive(true);
-        Debug.Log("positions are: " + _Start.position + " and " + _End.position);
+
+        _AssosiatedLabyrinth = _Assigner.GetAvailableLabyrinth();  //Assigning labyrinth
+        _isLabyrinthAssigned = true;
 
         StartCoroutine(Move());
     }
