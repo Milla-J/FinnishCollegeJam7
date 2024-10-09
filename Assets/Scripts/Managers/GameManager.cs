@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject popup; //reference to the maze/robot popup
-    public bool popupOpen = false;
-
     public Slider slider; //Reference to the satisfaction meter
     private float satisfaction; //satisfaction level
     public float delay = 0.5f;
@@ -30,17 +27,6 @@ public class GameManager : MonoBehaviour
         if (satisfaction <= 0)
         {
             GameOver();
-        }
-    }
-
-    public void OpenPopup(Labyrinth labyrinthToShow)
-    {
-        if (!popupOpen)
-        {
-            popup.SetActive(true);
-            popupOpen = true;
-            labyrinthToShow.gameObject.SetActive(true);
-            //add any cool visual effects
         }
     }
 

@@ -19,6 +19,9 @@ public class Labyrinth: MonoBehaviour
     private Problem previousProblem;
     private int randomIndex;
 
+    public void Show() => gameObject.SetActive(true);
+    public void Hide() => gameObject.SetActive(false);
+
     public void UpdateProblems(int problemsCount)
     {
         DeleteCurrentProblems();

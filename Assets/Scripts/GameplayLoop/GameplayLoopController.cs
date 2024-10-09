@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class GameplayLoopManager : MonoBehaviour
+public enum DifficultyLevels
 {
-    public static GameplayLoopManager Instance;
+    Easy,
+    Normal,
+    Hard
+}
 
+public class GameplayLoopController : MonoBehaviour
+{
+    public DifficultyLevels DifficultyLevel { get; private set; }
 
     [Header("Game Difficulty Flow parameters")]
     [SerializeField] private float _EntitiesPassedBeforeNormal;
@@ -14,44 +20,39 @@ public class GameplayLoopManager : MonoBehaviour
 
 
     [Header("Difficulty parameters")]
+    [Space(5)]
+    [Header("Speed")]
     [SerializeField] private float _EasyConveyerSpeed;
     [SerializeField] private float _NormalConveyerSpeed;
     [SerializeField] private float _HardConveyerSpeed;
+    [Header("Spawn Rate (seconds between spawns)")]
     [SerializeField] private float _EasySpawnRate; //seconds between spawns
     [SerializeField] private float _NormalSpawnRate;
     [SerializeField] private float _HardSpawnRate;
-
+    [Header("Spawn Chance")]
     [SerializeField] private float _GagsSpawnChance;
 
 
     [Header("Pullers")]
-    [SerializeField] private RobotsPuller _RobotsPool;
+    [SerializeField] private RobotsPool _RobotsPool;
     [SerializeField] private GagsPuller _GagsPool;
 
     private float currentSpawnRate;
 
     private bool gameStarted = false;
+    private bool IsThisFirstRun = false;
     private bool passedEasyMode = false;
     private bool passedNormalMode = false;
 
-    private List<Robot> robotsOnScene;
-    private Action<int> OnRobotsCountUpdated;
-
     ///Getters
     public float ConveyerSpeed { get; private set; } //Speed that is being shared 
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     public void StartGame()
     {
         ConveyerSpeed = _EasyConveyerSpeed;
         currentSpawnRate = _EasySpawnRate;
 
-        robotsOnScene = new();
-        OnRobotsCountUpdated += TryToSwitchMode;
+        IsThisFirstRun = true;
         gameStarted = true;
 
         StartCoroutine(SpawnEntitiesCoroutine());
@@ -61,6 +62,13 @@ public class GameplayLoopManager : MonoBehaviour
     {
         while (true)
         {
+            if (IsThisFirstRun)
+            {
+                IsThisFirstRun = false;
+                SpawnRobot();
+                continue;
+            }
+
             yield return new WaitForSeconds(currentSpawnRate);
             SpawnRobot();
             if(!gameStarted)
@@ -71,23 +79,34 @@ public class GameplayLoopManager : MonoBehaviour
     }
     private void SpawnRobot() //To-DO: remake to SpawnEntity()
     {
-        Robot newRobot = _RobotsPool.GetRobot();
-        robotsOnScene.Add(newRobot);
-        OnRobotsCountUpdated?.Invoke(robotsOnScene.Count);
-        newRobot.StartConveyerWay();
+        if(_RobotsPool.TryToGetRobot(out Robot newRobot))
+        {
+            TryToSwitchMode(_RobotsPool.PoolCount);
+            newRobot.StartConveyerWay();
+        }
+        else
+        {
+            Debug.LogWarning("No robot available");
+        }
     }
 
     private void TryToSwitchMode(int robotsCount)
     {
-        if(robotsCount == _EntitiesPassedBeforeNormal && !passedEasyMode)
+        if(_RobotsPool.PoolCount == _EntitiesPassedBeforeNormal && !passedEasyMode)
         {
+            Debug.Log("Switched to Normal Mode");
+
             passedEasyMode = true;
+            DifficultyLevel = DifficultyLevels.Normal;
             ConveyerSpeed = _NormalConveyerSpeed;
             currentSpawnRate = _NormalSpawnRate;
         }
-        else if(robotsCount == _EntitiesPassedBeforeHard && !passedNormalMode)
+        else if(_RobotsPool.PoolCount == _EntitiesPassedBeforeHard && !passedNormalMode)
         {
+            Debug.Log("Switched to Hard Mode");
+
             passedNormalMode = true;
+            DifficultyLevel = DifficultyLevels.Hard;
             ConveyerSpeed = _HardConveyerSpeed;
             currentSpawnRate = _HardSpawnRate;
         }

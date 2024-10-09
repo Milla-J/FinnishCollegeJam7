@@ -7,24 +7,28 @@ public class Robot : MonoBehaviour
 {
     [HideInInspector] public bool InUse;
     public event Action<Robot> OnExitConveyer;
+    public Labyrinth AssosiatedLabyrinth { get; private set; }
 
     //Move parameters
     private Transform _Start;
     private Transform _End;
 
-    private GameManager _GameManager;
-    private LabyrinthAssigner _Assigner;
+    private GameplayLoopController _GameplayLoopController;
+    private LabyrinthPool _LabyrinthController;
+    private PopUpController _PopUpController;
 
-    private Labyrinth _AssosiatedLabyrinth;
     private bool _isLabyrinthAssigned = false;
 
 
-   public void Instantiate(LabyrinthAssigner assigner, GameManager gameManager, Transform startMovementPoint, Transform endMovementPoint)
+   public void Instantiate(GameplayLoopController gameplayLoopController, LabyrinthPool labyrinthController, PopUpController popUpController, Transform startMovementPoint, Transform endMovementPoint)
    {
-        _Assigner = assigner;
-        _GameManager = gameManager;
+        _GameplayLoopController = gameplayLoopController;
+        _LabyrinthController = labyrinthController;
+        _PopUpController = popUpController;
+
         _Start = startMovementPoint;
         _End = endMovementPoint;
+
         gameObject.SetActive(false);
     }
 
@@ -34,30 +38,31 @@ public class Robot : MonoBehaviour
         Debug.Log("Square clicked!");
         if (!_isLabyrinthAssigned)
         {
-            _AssosiatedLabyrinth = _Assigner.GetAvailableLabyrinth(DifficultyLevels.Easy);
-            _isLabyrinthAssigned = true;
+            Debug.LogWarning("WAIT WHERE IS THE LABYRINTH >:(");
         }
-        _GameManager.OpenPopup(_AssosiatedLabyrinth);
+        _PopUpController.HandleLabyrinthPopUp(AssosiatedLabyrinth);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("RobotExit"))
+        if (collision.gameObject.CompareTag("RobotExit"))
         {
-            Debug.Log("RobotExit");
             StopAllCoroutines();
-            _AssosiatedLabyrinth.RemoveFromUse();
+            AssosiatedLabyrinth.RemoveFromUse();
             _isLabyrinthAssigned = false;
             OnExitConveyer?.Invoke(this);
 
             gameObject.SetActive(false);
+            Debug.Log("RobotExit");
         }
     }
 
     public void StartConveyerWay()
     {
         gameObject.SetActive(true);
-        Debug.Log("positions are: " + _Start.position + " and " + _End.position);
+
+        AssosiatedLabyrinth = _LabyrinthController.GetAvailableLabyrinth();  //Assigning labyrinth
+        _isLabyrinthAssigned = true;
 
         StartCoroutine(Move());
     }
@@ -68,7 +73,7 @@ public class Robot : MonoBehaviour
 
         while (transform.position != _End.position)
         {
-            float step = GameplayLoopManager.Instance.ConveyerSpeed * Time.deltaTime;
+            float step = _GameplayLoopController.ConveyerSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, _End.position, step);
             yield return null;
         }
