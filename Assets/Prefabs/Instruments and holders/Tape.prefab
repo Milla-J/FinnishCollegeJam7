@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6403832012393680079}
   - component: {fileID: 4940414581690835913}
   - component: {fileID: 6339954648766874477}
-  - component: {fileID: 2370415151265959483}
   - component: {fileID: 5979554334535125157}
   m_Layer: 0
   m_Name: Tape
@@ -147,22 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db09f5fbfcbece943ad299654342cb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Info: {fileID: 0}
   gameManager: {fileID: 0}
---- !u!114 &2370415151265959483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6811325461951757324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 004f215ccf3794e45925c1cdcf9d7fee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Info: {fileID: 11400000, guid: 98ef33c6c1994cd448d77b94091ccf6d, type: 2}
-  gameManager: {fileID: 0}
-  targetTag: Crack
 --- !u!257 &5979554334535125157
 TargetJoint2D:
   m_ObjectHideFlags: 0

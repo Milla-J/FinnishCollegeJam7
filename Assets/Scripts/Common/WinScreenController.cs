@@ -19,5 +19,6 @@ public class WinScreenController: MonoBehaviour
         _winScreen.SetActive(true);
         _ComplimentText.text = complimentText;
         _ScoreText.text = score;
+        Time.timeScale = 0; //Stoping the game
     }
 }
