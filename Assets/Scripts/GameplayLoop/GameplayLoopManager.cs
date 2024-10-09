@@ -20,13 +20,16 @@ public class GameplayLoopManager : MonoBehaviour
 
 
     [Header("Difficulty parameters")]
+    [Space(5)]
+    [Header("Speed")]
     [SerializeField] private float _EasyConveyerSpeed;
     [SerializeField] private float _NormalConveyerSpeed;
     [SerializeField] private float _HardConveyerSpeed;
+    [Header("Spawn Rate (seconds between spawns)")]
     [SerializeField] private float _EasySpawnRate; //seconds between spawns
     [SerializeField] private float _NormalSpawnRate;
     [SerializeField] private float _HardSpawnRate;
-
+    [Header("Spawn Chance")]
     [SerializeField] private float _GagsSpawnChance;
 
 

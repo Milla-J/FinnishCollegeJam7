@@ -18,12 +18,13 @@ public class PopUpManager : MonoBehaviour
     {
         if (_PopupOpen && _OpenLabyrinth!= labyrinthToShow)
         {
+            _OpenLabyrinth.Hide();
             _OpenLabyrinth = labyrinthToShow;
-            _PopupOpen = true;
 
             _OpenLabyrinth.Show();
             PopUpFrame.SetActive(true);
             //add any cool visual effects
+            _PopupOpen = true;
         }
         else if(_PopupOpen && _OpenLabyrinth == labyrinthToShow)
         {
@@ -36,11 +37,10 @@ public class PopUpManager : MonoBehaviour
         else if (!_PopupOpen)
         {
             _OpenLabyrinth = labyrinthToShow;
-            _PopupOpen = true;
-
             _OpenLabyrinth.Show();
             PopUpFrame.SetActive(true);
             //add any cool visual effects
+            _PopupOpen = true;
         }
         else
         {
