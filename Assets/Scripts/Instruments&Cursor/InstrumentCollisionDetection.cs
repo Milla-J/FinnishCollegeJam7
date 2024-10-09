@@ -18,7 +18,7 @@ public class InstrumentCollisionDetection : MonoBehaviour
             if (collidersInTrigger.Count == 0)
             {
                 Debug.Log("Instrument touched wall");
-                gameManager.StartCoroutine(gameManager.LowerSatisfactio());
+                gameManager.StartCoroutine(gameManager.LowerSatisfaction());
             }
 
             if (!collidersInTrigger.Contains(other))
