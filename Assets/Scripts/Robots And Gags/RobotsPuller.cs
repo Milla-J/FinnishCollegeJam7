@@ -20,7 +20,7 @@ public class RobotsPuller : MonoBehaviour
         }
     }
 
-    public Robot GetRobot()
+    public bool TryToGetRobot(out Robot newRobot)
     {
         UsefulStuff.ShuffleList(robotsObjects);
         foreach(var robot in robotsObjects)
@@ -29,11 +29,13 @@ public class RobotsPuller : MonoBehaviour
             {
                 robot.InUse = true;
                 robot.OnExitConveyer += AddBackToPool;
-                return robot;
+                newRobot = robot;
+                return true;
             }
         }
         Debug.Log("YOure not supposed to be here!");
-        return null;
+        newRobot = null;
+        return false;
     }
     private void AddBackToPool(Robot robot)
     {

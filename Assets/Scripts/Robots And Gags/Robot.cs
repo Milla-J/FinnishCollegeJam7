@@ -34,7 +34,7 @@ public class Robot : MonoBehaviour
         Debug.Log("Square clicked!");
         if (!_isLabyrinthAssigned)
         {
-            _AssosiatedLabyrinth = _Assigner.GetAvailableLabyrinth(DifficultyLevels.Easy);
+            _AssosiatedLabyrinth = _Assigner.GetAvailableLabyrinth();
             _isLabyrinthAssigned = true;
         }
         _GameManager.OpenPopup(_AssosiatedLabyrinth);

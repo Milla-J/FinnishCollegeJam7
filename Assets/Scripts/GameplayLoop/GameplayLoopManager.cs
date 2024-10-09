@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public enum DifficultyLevels
+{
+    Easy,
+    Normal,
+    Hard
+}
+
 public class GameplayLoopManager : MonoBehaviour
 {
     public static GameplayLoopManager Instance;
 
+    public DifficultyLevels DifficultyLevel;
 
     [Header("Game Difficulty Flow parameters")]
     [SerializeField] private float _EntitiesPassedBeforeNormal;
@@ -25,7 +33,7 @@ public class GameplayLoopManager : MonoBehaviour
 
 
     [Header("Pullers")]
-    [SerializeField] private RobotsPuller _RobotsPool;
+    [SerializeField] private RobotsPuller _RobotsPuller;
     [SerializeField] private GagsPuller _GagsPool;
 
     private float currentSpawnRate;
@@ -71,22 +79,32 @@ public class GameplayLoopManager : MonoBehaviour
     }
     private void SpawnRobot() //To-DO: remake to SpawnEntity()
     {
-        Robot newRobot = _RobotsPool.GetRobot();
-        robotsOnScene.Add(newRobot);
-        OnRobotsCountUpdated?.Invoke(robotsOnScene.Count);
-        newRobot.StartConveyerWay();
+        if(_RobotsPuller.TryToGetRobot(out Robot newRobot))
+        {
+            robotsOnScene.Add(newRobot);
+            OnRobotsCountUpdated?.Invoke(robotsOnScene.Count);
+            newRobot.StartConveyerWay();
+        }
+        else
+        {
+            Debug.LogWarning("No robot available");
+        }
     }
 
     private void TryToSwitchMode(int robotsCount)
     {
         if(robotsCount == _EntitiesPassedBeforeNormal && !passedEasyMode)
         {
+            DifficultyLevel = DifficultyLevels.Normal;
+
             passedEasyMode = true;
             ConveyerSpeed = _NormalConveyerSpeed;
             currentSpawnRate = _NormalSpawnRate;
         }
         else if(robotsCount == _EntitiesPassedBeforeHard && !passedNormalMode)
         {
+            DifficultyLevel = DifficultyLevels.Hard;
+
             passedNormalMode = true;
             ConveyerSpeed = _HardConveyerSpeed;
             currentSpawnRate = _HardSpawnRate;
