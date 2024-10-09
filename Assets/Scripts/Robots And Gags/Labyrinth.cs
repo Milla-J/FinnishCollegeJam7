@@ -8,7 +8,7 @@ public class Labyrinth: MonoBehaviour
 {
     [HideInInspector] public bool IsInUse;
 
-    public event Action<Labyrinth> OnCeasedToBeUsed;
+    public event Action<Labyrinth> OnNoLongerUsed;
 
     [SerializeField] private List<ProblemPlace> _ProblemsPlaces;
     [SerializeField] private List<Problem> _ProblemsPrefabs;
@@ -16,15 +16,24 @@ public class Labyrinth: MonoBehaviour
 
     private List<Problem> InstantiatedProblems = new();
 
-    private Problem previousProblem;
-    private int randomIndex;
+    private float _problemsFixed;
+    private float _problemsAmount;
+    public float FinalFactor { get; private set; } //Final completion factor
 
     public void Show() => gameObject.SetActive(true);
     public void Hide() => gameObject.SetActive(false);
 
+
+    /// <summary>
+    /// Prepares new labyrinth variant
+    /// </summary>
+    /// <param name="problemsCount"></param>
     public void UpdateProblems(int problemsCount)
     {
         DeleteCurrentProblems();
+        _problemsAmount = problemsCount;
+        _problemsFixed = 0;
+
         UsefulStuff.ShuffleList(_ProblemsPlaces); //Shuffle places for randomness
 
         for (int i = 0; i < problemsCount; i++)  // As much as problemsCount parameter
@@ -35,7 +44,8 @@ public class Labyrinth: MonoBehaviour
                 {
                     place.InUse = true;
                     var index = UsefulStuff.GetRandomIndex(_ProblemsPrefabs); //Chooses random problem
-                    Problem newProblem = Instantiate(_ProblemsPrefabs[index], place.transform.position, place.transform.rotation, _ProblemsParent);
+                    Problem newProblem = Instantiate(_ProblemsPrefabs[index], place.transform.position, place.transform.rotation, _ProblemsParent); //Instantiating problems
+                    newProblem.OnProblemFixed += UpdateCompletionPercentage;
                     InstantiatedProblems.Add(newProblem);
                     break;
                 }
@@ -48,7 +58,7 @@ public class Labyrinth: MonoBehaviour
     /// </summary>
     public void RemoveFromUse()
     {
-        OnCeasedToBeUsed?.Invoke(this);
+        OnNoLongerUsed?.Invoke(this);
     }
 
     private void DeleteCurrentProblems()
@@ -58,5 +68,13 @@ public class Labyrinth: MonoBehaviour
             Destroy(problem.gameObject);
         }
         InstantiatedProblems.Clear();
+    }
+
+    private void UpdateCompletionPercentage(Problem problemFixed)
+    {
+        problemFixed.OnProblemFixed -= UpdateCompletionPercentage;
+        _problemsFixed++;
+        FinalFactor = _problemsFixed /_problemsAmount;
+        Debug.Log(FinalFactor + " - Final factor");
     }
 }

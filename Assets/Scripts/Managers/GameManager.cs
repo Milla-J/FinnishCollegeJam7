@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void StopLowerSatisfaction()
     {
-        Debug.Log("Stopping coroutine");
+        //Debug.Log("Stopping coroutine");
         stopSatisfactionLowering = true;
     }
 

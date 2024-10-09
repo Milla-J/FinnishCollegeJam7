@@ -35,7 +35,7 @@ public class Robot : MonoBehaviour
     void OnMouseDown()
     {
         // This will be called when the square is clicked
-        Debug.Log("Square clicked!");
+        //Debug.Log("Square clicked!");
         if (!_isLabyrinthAssigned)
         {
             Debug.LogWarning("WAIT WHERE IS THE LABYRINTH >:(");
@@ -48,9 +48,11 @@ public class Robot : MonoBehaviour
         if (collision.gameObject.CompareTag("RobotExit"))
         {
             StopAllCoroutines();
-            AssosiatedLabyrinth.RemoveFromUse();
+
+            AssosiatedLabyrinth.RemoveFromUse(); //So the labyrinth would be set as available in the Pool
             _isLabyrinthAssigned = false;
-            OnExitConveyer?.Invoke(this);
+
+            OnExitConveyer?.Invoke(this); //So it would be set as available in the Pool
 
             gameObject.SetActive(false);
             Debug.Log("RobotExit");

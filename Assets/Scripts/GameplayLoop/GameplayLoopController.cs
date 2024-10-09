@@ -129,17 +129,10 @@ public class GameplayLoopController : MonoBehaviour
         }
     }
 
-    private void EndGame()
+    private void EndGame(float score)
     {
         StopAllCoroutines();
-        var score = CountScore();
         _winScreenController.ShowWinScreen("Good", score.ToString());
         Debug.Log("End game");
-    }
-
-    private int CountScore()
-    {
-        //Count score
-        return 0;
     }
 }

@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using System;
 
 public class Problem : MonoBehaviour
 {
-    public string targetTag;
+    public event Action<Problem> OnProblemFixed;
+    [SerializeField] private string targetTag;
 
-    public Sprite newSprite;
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite newSprite;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private Collider2D myCollider;
 
@@ -24,6 +26,7 @@ public class Problem : MonoBehaviour
         if (other.tag == targetTag)
         {
             Debug.Log("Fixed problem");
+            OnProblemFixed?.Invoke(this);
             ChangeSprite(Color.blue);
         }
     }
