@@ -5,27 +5,27 @@ using System;
 
 public class Robot : MonoBehaviour
 {
-    public bool InUse;
+    [HideInInspector] public bool InUse;
     public event Action<Robot> OnExitConveyer;
 
-    [SerializeField] private GameManager gameManager; //reference to the game manager
-    [SerializeField] private LabyrinthAssigner assigner;
-
     //Move parameters
-    public float speed = 5f;
-    public GameObject start;
-    public GameObject end;
+    private Transform _Start;
+    private Transform _End;
 
-    private Vector3 startPosition;
-    private Vector3 endPosition;
+    private GameManager _GameManager;
+    private LabyrinthAssigner _Assigner;
 
-    private Labyrinth _labyrinth;
+    private Labyrinth _AssosiatedLabyrinth;
     private bool _isLabyrinthAssigned = false;
 
 
-    private void Awake()
-    {
-        gameObject.SetActive(false);  //Making sure object in inactive
+   public void Instantiate(LabyrinthAssigner assigner, GameManager gameManager, Transform startMovementPoint, Transform endMovementPoint)
+   {
+        _Assigner = assigner;
+        _GameManager = gameManager;
+        _Start = startMovementPoint;
+        _End = endMovementPoint;
+        gameObject.SetActive(false);
     }
 
     void OnMouseDown()
@@ -34,10 +34,10 @@ public class Robot : MonoBehaviour
         Debug.Log("Square clicked!");
         if (!_isLabyrinthAssigned)
         {
-            _labyrinth = assigner.GetAvailableLabyrinth(DifficultyLevels.Easy);
+            _AssosiatedLabyrinth = _Assigner.GetAvailableLabyrinth(DifficultyLevels.Easy);
             _isLabyrinthAssigned = true;
         }
-        gameManager.OpenPopup(_labyrinth);
+        _GameManager.OpenPopup(_AssosiatedLabyrinth);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,7 +46,7 @@ public class Robot : MonoBehaviour
         {
             Debug.Log("RobotExit");
             StopAllCoroutines();
-            _labyrinth.RemoveFromUse();
+            _AssosiatedLabyrinth.RemoveFromUse();
             _isLabyrinthAssigned = false;
             OnExitConveyer?.Invoke(this);
 
@@ -57,22 +57,19 @@ public class Robot : MonoBehaviour
     public void StartConveyerWay()
     {
         gameObject.SetActive(true);
-
-        startPosition = start.transform.position;
-        endPosition = end.transform.position;
-        Debug.Log("positions are: " + startPosition + " and " + endPosition);
+        Debug.Log("positions are: " + _Start.position + " and " + _End.position);
 
         StartCoroutine(Move());
     }
 
     public IEnumerator Move()
     {
-        transform.position = startPosition;
+        transform.position = _Start.position;
 
-        while (transform.position != endPosition)
+        while (transform.position != _End.position)
         {
-            float step = speed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, endPosition, step);
+            float step = GameplayLoopManager.Instance.ConveyerSpeed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, _End.position, step);
             yield return null;
         }
     }

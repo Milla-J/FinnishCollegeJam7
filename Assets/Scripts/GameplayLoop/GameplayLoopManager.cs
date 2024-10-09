@@ -7,15 +7,16 @@ public class GameplayLoopManager : MonoBehaviour
 {
     public static GameplayLoopManager Instance;
 
+
     [Header("Game Difficulty Flow parameters")]
     [SerializeField] private float _EntitiesPassedBeforeNormal;
     [SerializeField] private float _EntitiesPassedBeforeHard;
 
 
     [Header("Difficulty parameters")]
-    [SerializeField] private float _EasySpeed;
-    [SerializeField] private float _NormalSpeed;
-    [SerializeField] private float _HardSpeed;
+    [SerializeField] private float _EasyConveyerSpeed;
+    [SerializeField] private float _NormalConveyerSpeed;
+    [SerializeField] private float _HardConveyerSpeed;
     [SerializeField] private float _EasySpawnRate; //seconds between spawns
     [SerializeField] private float _NormalSpawnRate;
     [SerializeField] private float _HardSpawnRate;
@@ -24,12 +25,10 @@ public class GameplayLoopManager : MonoBehaviour
 
 
     [Header("Pullers")]
-    [SerializeField] private RobotsPuller _RobotsPuller;
-    [SerializeField] private GagsPuller _GagsPuller;
+    [SerializeField] private RobotsPuller _RobotsPool;
+    [SerializeField] private GagsPuller _GagsPool;
 
     private float currentSpawnRate;
-    //Timer and Timings
-    private float timer;
 
     private bool gameStarted = false;
     private bool passedEasyMode = false;
@@ -39,33 +38,40 @@ public class GameplayLoopManager : MonoBehaviour
     private Action<int> OnRobotsCountUpdated;
 
     ///Getters
-    public float Speed { get; private set; } //Speed ythat is being shared 
+    public float ConveyerSpeed { get; private set; } //Speed that is being shared 
 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void StartGame()
     {
-        Speed = _EasySpeed;
+        ConveyerSpeed = _EasyConveyerSpeed;
         currentSpawnRate = _EasySpawnRate;
 
         robotsOnScene = new();
         OnRobotsCountUpdated += TryToSwitchMode;
         gameStarted = true;
+
+        StartCoroutine(SpawnEntitiesCoroutine());
     }
 
-    private void Update()
+    IEnumerator SpawnEntitiesCoroutine()
     {
-        //if (!_gameStarted)
-        //    return;
-
-        timer += Time.deltaTime;
-        Debug.Log(timer);
-
-        //if( && !passedEasyMode)
+        while (true)
+        {
+            yield return new WaitForSeconds(currentSpawnRate);
+            SpawnRobot();
+            if(!gameStarted)
+            {
+                break;
+            }
+        }
     }
-    IEnumerator SpawnEntity
     private void SpawnRobot() //To-DO: remake to SpawnEntity()
     {
-        Robot newRobot = _RobotsPuller.PullRobot();
+        Robot newRobot = _RobotsPool.GetRobot();
         robotsOnScene.Add(newRobot);
         OnRobotsCountUpdated?.Invoke(robotsOnScene.Count);
         newRobot.StartConveyerWay();
@@ -76,8 +82,14 @@ public class GameplayLoopManager : MonoBehaviour
         if(robotsCount == _EntitiesPassedBeforeNormal && !passedEasyMode)
         {
             passedEasyMode = true;
-            Speed = _NormalSpeed;
+            ConveyerSpeed = _NormalConveyerSpeed;
             currentSpawnRate = _NormalSpawnRate;
+        }
+        else if(robotsCount == _EntitiesPassedBeforeHard && !passedNormalMode)
+        {
+            passedNormalMode = true;
+            ConveyerSpeed = _HardConveyerSpeed;
+            currentSpawnRate = _HardSpawnRate;
         }
     }
 }
