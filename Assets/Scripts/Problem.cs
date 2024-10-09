@@ -10,7 +10,7 @@ public class Problem : MonoBehaviour
     [SerializeField] private string targetTag;
 
     [SerializeField] private Sprite newSprite;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+     private SpriteRenderer spriteRenderer;
 
     private Collider2D myCollider;
 
