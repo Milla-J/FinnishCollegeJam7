@@ -12,6 +12,8 @@ TagManager:
   - RobotExit
   - Wires
   - Bump
+  - Glue
+  - Hammer
   layers:
   - Default
   - TransparentFX

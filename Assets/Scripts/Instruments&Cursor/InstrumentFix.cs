@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InstrumentFix : Instrument
+public class InstrumentFix : MonoBehaviour
 {
     public GameManager gameManager;
     public string targetTag;

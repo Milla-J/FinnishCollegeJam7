@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2521406750375389632}
   m_Layer: 0
   m_Name: Trigger
-  m_TagString: Untagged
+  m_TagString: Hammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +62,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -90,7 +90,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004f215ccf3794e45925c1cdcf9d7fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Info: {fileID: 11400000, guid: 98ef33c6c1994cd448d77b94091ccf6d, type: 2}
   gameManager: {fileID: 0}
   targetTag: Bump
 --- !u!1 &5001985504377252245
@@ -109,7 +108,7 @@ GameObject:
   - component: {fileID: 8726330601876908943}
   m_Layer: 0
   m_Name: Hammer
-  m_TagString: Brush
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -240,6 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db09f5fbfcbece943ad299654342cb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Info: {fileID: 11400000, guid: 98ef33c6c1994cd448d77b94091ccf6d, type: 2}
   gameManager: {fileID: 0}
 --- !u!257 &8726330601876908943
 TargetJoint2D:
