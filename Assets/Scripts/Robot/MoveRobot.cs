@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MoveRobot : MonoBehaviour
 {
+    public bool IsInUse;
+    public event Action OnExitConveyer;
+
     public float speed = 5f;
     public GameObject start;
     public GameObject end;

@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         stopSatisfactionLowering = true;
     }
 
-    public IEnumerator LowerSatisfactio()
+    public IEnumerator LowerSatisfaction()
     {
         while (!stopSatisfactionLowering)
         {
