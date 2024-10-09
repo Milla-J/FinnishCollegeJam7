@@ -49,6 +49,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 4066678117
+    locked: 0
+  - name: Conveyer
+    uniqueID: 1279946981
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: MazeTop
+    uniqueID: 1047432137
     locked: 0

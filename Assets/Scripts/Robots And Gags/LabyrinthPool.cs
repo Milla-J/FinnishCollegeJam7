@@ -32,7 +32,7 @@ public class LabyrinthPool : MonoBehaviour
                     {
                         labyr.UpdateProblems(_EasyProblemsAmount);
                         labyr.IsInUse = true;
-                        labyr.OnCeasedToBeUsed += RestoreUse;
+                        labyr.OnNoLongerUsed += RestoreUse;
                         return labyr;
                     }
                 }
@@ -47,7 +47,7 @@ public class LabyrinthPool : MonoBehaviour
                     {
                         labyr.UpdateProblems(_NormalProblemsAmount);
                         labyr.IsInUse = true;
-                        labyr.OnCeasedToBeUsed += RestoreUse;
+                        labyr.OnNoLongerUsed += RestoreUse;
                         return labyr;
                     }
                 }
@@ -62,7 +62,7 @@ public class LabyrinthPool : MonoBehaviour
                     {
                         labyr.UpdateProblems(_HardProblemsAmount);
                         labyr.IsInUse = true;
-                        labyr.OnCeasedToBeUsed += RestoreUse;
+                        labyr.OnNoLongerUsed += RestoreUse;
                         return labyr;
                     }
                 }
@@ -70,7 +70,6 @@ public class LabyrinthPool : MonoBehaviour
         }
         return null;
     }
-
     private void RestoreUse(Labyrinth labyrinth)
     {
          labyrinth.IsInUse = true;

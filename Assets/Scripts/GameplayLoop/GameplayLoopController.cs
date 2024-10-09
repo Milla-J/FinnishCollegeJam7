@@ -14,13 +14,31 @@ public class GameplayLoopController : MonoBehaviour
 {
     public DifficultyLevels DifficultyLevel { get; private set; }
 
+    [Header("Ending The Game Conditions")]
+    [SerializeField] private int _robotsInGame;
+
+    [Header("Ending The Game Parameters")]
+    [SerializeField] private string _BestCompliment;
+    [SerializeField] private string _NormalCompliment;
+    [SerializeField] private string _WorstCompliment;
+    [SerializeField] private float _scoreMultiplier;
+
+    [Header("Robots Exit, Win and Lose Controllers")]
+    [SerializeField] private RobotsExit _robotsExit;
+    [SerializeField] private WinScreenController _winScreenController;
+
+    [Header("Pullers")]
+    [SerializeField] private RobotsPool _RobotsPool;
+    [SerializeField] private GagsPuller _GagsPool;
+
+
     [Header("Game Difficulty Flow parameters")]
     [SerializeField] private float _EntitiesPassedBeforeNormal;
     [SerializeField] private float _EntitiesPassedBeforeHard;
 
-
-    [Header("Difficulty parameters")]
     [Space(5)]
+    [Header("Difficulty parameters")]
+    [Space(2)]
     [Header("Speed")]
     [SerializeField] private float _EasyConveyerSpeed;
     [SerializeField] private float _NormalConveyerSpeed;
@@ -32,10 +50,6 @@ public class GameplayLoopController : MonoBehaviour
     [Header("Spawn Chance")]
     [SerializeField] private float _GagsSpawnChance;
 
-
-    [Header("Pullers")]
-    [SerializeField] private RobotsPool _RobotsPool;
-    [SerializeField] private GagsPuller _GagsPool;
 
     private float currentSpawnRate;
 
@@ -54,6 +68,10 @@ public class GameplayLoopController : MonoBehaviour
 
         IsThisFirstRun = true;
         gameStarted = true;
+
+        _RobotsPool.Initialize(_robotsInGame);
+        _robotsExit.SetEndingCondition(_robotsInGame, _scoreMultiplier);
+        _robotsExit.OnEndingConditionMet += EndGame;
 
         StartCoroutine(SpawnEntitiesCoroutine());
     }
@@ -109,6 +127,33 @@ public class GameplayLoopController : MonoBehaviour
             DifficultyLevel = DifficultyLevels.Hard;
             ConveyerSpeed = _HardConveyerSpeed;
             currentSpawnRate = _HardSpawnRate;
+        }
+    }
+
+    private void EndGame(float score) //Raw score is and
+    {
+        StopAllCoroutines();
+        _winScreenController.ShowWinScreen(CalculateCompliment(score), score.ToString());
+        Debug.Log("End game");
+    
+    }
+    private string CalculateCompliment(float score)
+    {
+        float maxScore = _robotsInGame * _scoreMultiplier;
+        float scorePercentage = (score / maxScore) * 100;         // Calculate the percentage of the achieved score
+
+        // Determine the compliment based on the percentage range
+        if (scorePercentage >= 90f)
+        {
+            return _BestCompliment;
+        }
+        else if (scorePercentage >= 50f)
+        {
+            return _NormalCompliment;
+        }
+        else
+        {
+            return _WorstCompliment;
         }
     }
 }

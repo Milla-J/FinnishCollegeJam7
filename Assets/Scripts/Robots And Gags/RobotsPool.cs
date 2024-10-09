@@ -14,21 +14,30 @@ public class RobotsPool : MonoBehaviour
 
     public int PoolCount
     { 
-        get => _PoolCount;
+        get => _poolCount;
     }
 
-    private int _PoolCount;
+    private int _poolCount;
+    private int _maxPooled;
 
-    private void Awake()
+    public void Initialize(int maxRobots)
     {
         foreach (var robot in pool)
         {
             robot.Instantiate(_GameplayLoopManager, _LabyrinthAssigner, _PopUpManager, _ConveyerStartPoint, _ConveyerEndPoint);
         }
+        _maxPooled = maxRobots;
+
     }
 
     public bool TryToGetRobot(out Robot newRobot)
     {
+        if (_poolCount >= _maxPooled)
+        {
+            newRobot = null;
+            return false;
+        }
+
         UsefulStuff.ShuffleList(pool);
         foreach(var robot in pool)
         {
@@ -37,7 +46,7 @@ public class RobotsPool : MonoBehaviour
                 robot.InUse = true;
                 robot.OnExitConveyer += AddBackToPool;
                 newRobot = robot;
-                _PoolCount++;
+                _poolCount++;
                 return true;
             }
         }

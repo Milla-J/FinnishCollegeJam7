@@ -145,3 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTag: Brush
   newSprite: {fileID: 0}
+  spriteRenderer: {fileID: 7935007289026617480}

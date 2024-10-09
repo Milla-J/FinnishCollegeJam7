@@ -675,6 +675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1931697247067273804}
   - component: {fileID: 6605166406848606968}
+  - component: {fileID: 6242452849851468532}
   m_Layer: 0
   m_Name: Maze4
   m_TagString: Untagged
@@ -728,6 +729,27 @@ MonoBehaviour:
   - {fileID: 2577519461130682843, guid: 5e3e3fe783b871547b23d2ba6ce6d769, type: 3}
   - {fileID: 3516459252343469005, guid: 8c335fb97ce25534a9b25a5f64f3b3c7, type: 3}
   _ProblemsParent: {fileID: 1342727372503391113}
+--- !u!95 &6242452849851468532
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5290038512243146619}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2ed9f7f068e74654d9a59c0d74f6f868, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5638474165762508215
 GameObject:
   m_ObjectHideFlags: 0

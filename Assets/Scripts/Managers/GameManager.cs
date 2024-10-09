@@ -6,20 +6,22 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Slider slider; //Reference to the satisfaction meter
+    [SerializeField] private Slider slider; //Reference to the satisfaction meter
     private float satisfaction; //satisfaction level
-    public float delay = 0.5f;
+    [SerializeField] private float delay = 0.5f;
     private bool stopSatisfactionLowering = false;
 
     public bool fixing = false;
 
-    public GameObject GameOverPanel;
+    [SerializeField] private GameObject _loseScreen;
+    [SerializeField] private GameplayLoopController _gameplayLoopController;
 
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
         satisfaction = slider.value;
+        _gameplayLoopController.StartGame();
     }
 
     void Update()
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void StopLowerSatisfaction()
     {
-        Debug.Log("Stopping coroutine");
+        //Debug.Log("Stopping coroutine");
         stopSatisfactionLowering = true;
     }
 
@@ -63,6 +65,6 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         Time.timeScale = 0;
-        GameOverPanel.SetActive(true);
+        _loseScreen.SetActive(true);
     }
 }
