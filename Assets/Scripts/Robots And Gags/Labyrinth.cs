@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class Labyrinth: MonoBehaviour
@@ -16,13 +17,32 @@ public class Labyrinth: MonoBehaviour
 
     private List<Problem> InstantiatedProblems = new();
 
+    private Animator _animator;
+
     private float _problemsFixed;
     private float _problemsAmount;
     public float FinalFactor { get; private set; } //Final completion factor
 
-    public void Show() => gameObject.SetActive(true);
-    public void Hide() => gameObject.SetActive(false);
+    public void SetActiveTrue() => gameObject.SetActive(true);
+    public void SetActiveFalse() => gameObject.SetActive(false);
 
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+        SetActiveFalse();
+    }
+
+    // Cool Visual Effects
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        _animator.SetTrigger("Appear");
+    }
+    public void Hide()
+    {
+        _animator.SetTrigger("Dissapear");
+    }
+    // Cool Visual Effects
 
     /// <summary>
     /// Prepares new labyrinth variant

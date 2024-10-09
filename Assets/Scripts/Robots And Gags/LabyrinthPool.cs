@@ -70,7 +70,6 @@ public class LabyrinthPool : MonoBehaviour
         }
         return null;
     }
-
     private void RestoreUse(Labyrinth labyrinth)
     {
          labyrinth.IsInUse = true;

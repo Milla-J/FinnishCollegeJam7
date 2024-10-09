@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class PopUpController : MonoBehaviour
 {
-    [SerializeField] private GameObject PopUpFrame;
-    private bool _PopupOpen = false;
+    //[SerializeField] private PopUp _popUp;
+
+    private bool _PopupOpen;
+
     private Labyrinth _OpenedLabyrinth;
 
     private void Awake()
     {
         _OpenedLabyrinth = null;
         _PopupOpen = false;
-        PopUpFrame.SetActive(false);
     }
 
     /// <summary>
@@ -23,12 +24,16 @@ public class PopUpController : MonoBehaviour
     {
         if (_PopupOpen && _OpenedLabyrinth != labyrinthToShow)
         {
-            _OpenedLabyrinth.Hide();
-            _OpenedLabyrinth = labyrinthToShow;
-            _OpenedLabyrinth.Show();
+            //_OpenedLabyrinth.Hide();
+            //_OpenedLabyrinth = labyrinthToShow;
+            //_OpenedLabyrinth.Show();
 
-            PopUpFrame.SetActive(true);
+            _OpenedLabyrinth.SetActiveFalse();
+            _OpenedLabyrinth = labyrinthToShow;
+            _OpenedLabyrinth.SetActiveTrue();
+
             _PopupOpen = true;
+
             //add any cool visual effects
         }
         else if(_PopupOpen && _OpenedLabyrinth == labyrinthToShow)
@@ -36,8 +41,8 @@ public class PopUpController : MonoBehaviour
             _OpenedLabyrinth.Hide();
             _OpenedLabyrinth = null;
 
-            PopUpFrame.SetActive(false);
             _PopupOpen = false;
+
             //add any cool visual effects
         }
         else if (!_PopupOpen)
@@ -45,8 +50,8 @@ public class PopUpController : MonoBehaviour
             _OpenedLabyrinth = labyrinthToShow;
             _OpenedLabyrinth.Show();
 
-            PopUpFrame.SetActive(true);
             _PopupOpen = true;
+
             //add any cool visual effects
         }
         else
@@ -62,7 +67,6 @@ public class PopUpController : MonoBehaviour
             _OpenedLabyrinth.Hide();
             _OpenedLabyrinth = null;
 
-            PopUpFrame.SetActive(false);
             _PopupOpen = false;
             //add any cool visual effects
         }
