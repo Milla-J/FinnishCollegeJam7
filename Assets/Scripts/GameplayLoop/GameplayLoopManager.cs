@@ -12,9 +12,7 @@ public enum DifficultyLevels
 
 public class GameplayLoopManager : MonoBehaviour
 {
-    public static GameplayLoopManager Instance;
-
-    public DifficultyLevels DifficultyLevel;
+    public DifficultyLevels DifficultyLevel { get; private set; }
 
     [Header("Game Difficulty Flow parameters")]
     [SerializeField] private float _EntitiesPassedBeforeNormal;
@@ -47,11 +45,6 @@ public class GameplayLoopManager : MonoBehaviour
 
     ///Getters
     public float ConveyerSpeed { get; private set; } //Speed that is being shared 
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     public void StartGame()
     {

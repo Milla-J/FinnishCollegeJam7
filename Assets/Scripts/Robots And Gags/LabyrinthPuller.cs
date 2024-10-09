@@ -4,8 +4,10 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using System.Linq;
 
-public class LabyrinthAssigner : MonoBehaviour
+public class LabyrinthPuller : MonoBehaviour
 {
+    [SerializeField] private GameplayLoopManager _GameplayLoopManager;
+
     [SerializeField] private List<Labyrinth> _EasyLabyrinths;
     [SerializeField] private int _EasyProblemsAmount;
 
@@ -19,7 +21,7 @@ public class LabyrinthAssigner : MonoBehaviour
 
     public Labyrinth GetAvailableLabyrinth()
     {
-        switch (GameplayLoopManager.Instance.DifficultyLevel)
+        switch (_GameplayLoopManager.DifficultyLevel)
         {
             case DifficultyLevels.Easy:
                 UsefulStuff.ShuffleList(_EasyLabyrinths); //Shuffling for randomness

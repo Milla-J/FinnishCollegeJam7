@@ -6,8 +6,10 @@ public class RobotsPuller : MonoBehaviour
     [SerializeField] private List<Robot> robotsObjects;
 
     [Header("Things for robots' initialization")]
-    [SerializeField] private LabyrinthAssigner _LabyrinthAssigner;
+    [SerializeField] private LabyrinthPuller _LabyrinthAssigner;
+    [SerializeField] private GameplayLoopManager _GameplayLoopManager;
     [SerializeField] private GameManager _GameManager;
+    [SerializeField] private PopUpManager _PopUpManager;
     [SerializeField] private Transform _ConveyerStartPoint;
     [SerializeField] private Transform _ConveyerEndPoint;
 
@@ -16,7 +18,7 @@ public class RobotsPuller : MonoBehaviour
     {
         foreach (var robot in robotsObjects)
         {
-            robot.Instantiate(_LabyrinthAssigner, _GameManager, _ConveyerStartPoint, _ConveyerEndPoint);
+            robot.Instantiate(_GameplayLoopManager, _LabyrinthAssigner, _PopUpManager, _ConveyerStartPoint, _ConveyerEndPoint);
         }
     }
 

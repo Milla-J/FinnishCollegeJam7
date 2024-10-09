@@ -12,17 +12,19 @@ public class Robot : MonoBehaviour
     private Transform _Start;
     private Transform _End;
 
-    private GameManager _GameManager;
-    private LabyrinthAssigner _Assigner;
+    private PopUpManager _PopUpManager;
+    private GameplayLoopManager _GameplayLoopManager;
+    private LabyrinthPuller _Assigner;
 
     private Labyrinth _AssosiatedLabyrinth;
     private bool _isLabyrinthAssigned = false;
 
 
-   public void Instantiate(LabyrinthAssigner assigner, GameManager gameManager, Transform startMovementPoint, Transform endMovementPoint)
+   public void Instantiate(GameplayLoopManager gameplayLoopManager, LabyrinthPuller assigner, PopUpManager popUpManager, Transform startMovementPoint, Transform endMovementPoint)
    {
         _Assigner = assigner;
-        _GameManager = gameManager;
+        _PopUpManager = popUpManager;
+        _GameplayLoopManager = gameplayLoopManager;
         _Start = startMovementPoint;
         _End = endMovementPoint;
         gameObject.SetActive(false);
@@ -37,7 +39,7 @@ public class Robot : MonoBehaviour
             _AssosiatedLabyrinth = _Assigner.GetAvailableLabyrinth();
             _isLabyrinthAssigned = true;
         }
-        _GameManager.OpenPopup(_AssosiatedLabyrinth);
+        _PopUpManager.HandleLabyrinthPopUp(_AssosiatedLabyrinth);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -68,7 +70,7 @@ public class Robot : MonoBehaviour
 
         while (transform.position != _End.position)
         {
-            float step = GameplayLoopManager.Instance.ConveyerSpeed * Time.deltaTime;
+            float step = _GameplayLoopManager.ConveyerSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, _End.position, step);
             yield return null;
         }
