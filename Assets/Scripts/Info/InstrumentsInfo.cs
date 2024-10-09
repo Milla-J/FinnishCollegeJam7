@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InstrumentsCommonInfo", menuName = "ScriptableObjects/InstrumentsCommonInfo", order = 1)]

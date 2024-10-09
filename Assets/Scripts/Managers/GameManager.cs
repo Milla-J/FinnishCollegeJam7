@@ -22,12 +22,13 @@ public class GameManager : MonoBehaviour
         satisfaction = slider.value;
     }
 
-    public void OpenPopup()
+    public void OpenPopup(Labyrinth labyrinthToShow)
     {
         if (!popupOpen)
         {
             popup.SetActive(true);
             popupOpen = true;
+            labyrinthToShow.gameObject.SetActive(true);
             //add any cool visual effects
         }
     }
