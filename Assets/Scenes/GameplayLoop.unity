@@ -787,10 +787,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2113595959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -81}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0.4202759, y: 0.17558694}
+  m_AnchorMax: {x: 0.5756207, y: 0.34820655}
+  m_AnchoredPosition: {x: 1.5, y: 0.69999695}
+  m_SizeDelta: {x: 87, y: -28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &499721154
 MonoBehaviour:
@@ -1046,10 +1046,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2113595959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 68}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0.35675862, y: 0.56158704}
+  m_AnchorMax: {x: 0.64737934, y: 0.72938055}
+  m_AnchoredPosition: {x: -1.5, y: 2}
+  m_SizeDelta: {x: -11, y: -26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &636945354
 MonoBehaviour:
@@ -1852,7 +1852,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popUpController: {fileID: 1358982427}
-  _scoreMultiplier: 100
 --- !u!1 &1094304869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7393888836252321110, guid: 818bb67b3c883b44a83eb476850ed407, type: 3}
@@ -2051,10 +2050,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2113595959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0.35675862, y: 0.38317388}
+  m_AnchorMax: {x: 0.639138, y: 0.5}
+  m_AnchoredPosition: {x: 1.5, y: 1.5}
+  m_SizeDelta: {x: -5, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1211275213
 MonoBehaviour:
@@ -2103,7 +2102,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47
+  m_fontSize: 46.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3977,7 +3976,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2113595959
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4601,6 +4600,7 @@ MonoBehaviour:
   _BestCompliment: 
   _NormalCompliment: 
   _WorstCompliment: 
+  _scoreMultiplier: 100
   _robotsExit: {fileID: 1071180575}
   _winScreenController: {fileID: 1722702572}
 --- !u!1 &7939340330514294264

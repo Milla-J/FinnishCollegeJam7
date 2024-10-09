@@ -44,6 +44,7 @@ public class GameplayLoopController : MonoBehaviour
     [SerializeField] private string _BestCompliment;
     [SerializeField] private string _NormalCompliment;
     [SerializeField] private string _WorstCompliment;
+    [SerializeField] private float _scoreMultiplier;
 
 
     [Header("Robots Exit, Win and Lose Controllers")]
@@ -69,7 +70,7 @@ public class GameplayLoopController : MonoBehaviour
         gameStarted = true;
 
         _RobotsPool.Initialize(_robotsInGame);
-        _robotsExit.SetEndingCondition(_robotsInGame);
+        _robotsExit.SetEndingCondition(_robotsInGame, _scoreMultiplier);
         _robotsExit.OnEndingConditionMet += EndGame;
 
         StartCoroutine(SpawnEntitiesCoroutine());
@@ -129,10 +130,30 @@ public class GameplayLoopController : MonoBehaviour
         }
     }
 
-    private void EndGame(float score)
+    private void EndGame(float score) //Raw score is and
     {
         StopAllCoroutines();
-        _winScreenController.ShowWinScreen("Good", score.ToString());
+        _winScreenController.ShowWinScreen(CalculateCompliment(score), score.ToString());
         Debug.Log("End game");
+    
+    }
+    private string CalculateCompliment(float score)
+    {
+        float maxScore = _robotsInGame * _scoreMultiplier;
+        float scorePercentage = (score / maxScore) * 100;         // Calculate the percentage of the achieved score
+
+        // Determine the compliment based on the percentage range
+        if (scorePercentage >= 90f)
+        {
+            return "Great! You did an amazing job!";
+        }
+        else if (scorePercentage >= 50f)
+        {
+            return "Good job! There's still room for improvement!";
+        }
+        else
+        {
+            return "You can do better! Keep trying!";
+        }
     }
 }

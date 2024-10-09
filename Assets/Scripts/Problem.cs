@@ -25,7 +25,7 @@ public class Problem : MonoBehaviour
     {
         if (other.tag == targetTag)
         {
-            Debug.Log("Fixed problem");
+            //Debug.Log("Fixed problem");
             OnProblemFixed?.Invoke(this);
             ChangeSprite(Color.blue);
         }
@@ -47,7 +47,7 @@ public class Problem : MonoBehaviour
 
     private void ChangeSprite(Color newColor)
     {
-        Debug.Log("Changing sprite");
+        //Debug.Log("Changing sprite");
         spriteRenderer.color = newColor;
         //spriteRenderer.sprite = newSprite;
     }

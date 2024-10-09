@@ -7,16 +7,18 @@ using UnityEngine.Rendering;
 public class RobotsExit : MonoBehaviour
 {
     [SerializeField] private PopUpController popUpController;
-    [Header("Score parameters")]
-    [SerializeField] private float _scoreMultiplier;
+    
+    private float _scoreMultiplier;
+
     private int _robotsPassed;
     private int _targetRobotsAmount;
     private float _currentScore;
 
     public event Action<float> OnEndingConditionMet;
 
-    public void SetEndingCondition(int robotsPassed)
+    public void SetEndingCondition(int robotsPassed, float scoreMultiplier)
     {
+        _scoreMultiplier = scoreMultiplier;
         _targetRobotsAmount = robotsPassed;
         _robotsPassed = 0;
     }
@@ -39,8 +41,9 @@ public class RobotsExit : MonoBehaviour
 
     private float CalculateScore()
     {
-        Debug.Log(_currentScore + " " + (_currentScore / _targetRobotsAmount) * _scoreMultiplier);
-        return(float)(Math.Round(_targetRobotsAmount / _currentScore) * _scoreMultiplier);
+        Debug.Log(_currentScore);
+        Debug.Log(_currentScore / _targetRobotsAmount);
+        var finalScore = (_currentScore / _targetRobotsAmount) * _scoreMultiplier;
+        return (float)(Math.Round(finalScore));
     }
-
 }

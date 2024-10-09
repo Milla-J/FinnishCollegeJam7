@@ -55,7 +55,7 @@ public class Robot : MonoBehaviour
             OnExitConveyer?.Invoke(this); //So it would be set as available in the Pool
 
             gameObject.SetActive(false);
-            Debug.Log("RobotExit");
+            //Debug.Log("RobotExit");
         }
     }
 

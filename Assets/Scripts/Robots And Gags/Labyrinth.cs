@@ -75,6 +75,5 @@ public class Labyrinth: MonoBehaviour
         problemFixed.OnProblemFixed -= UpdateCompletionPercentage;
         _problemsFixed++;
         FinalFactor = _problemsFixed /_problemsAmount;
-        Debug.Log(FinalFactor + " - Final factor");
     }
 }
