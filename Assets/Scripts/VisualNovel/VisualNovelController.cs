@@ -6,6 +6,8 @@ using UnityEngine;
 public class VisualNovelController : MonoBehaviour
 {
     public event Action OnSceneEnded;
+    public event Action<int> OnSentenceCompleted;
+
     //Speed parameters
     [SerializeField] private float _symbolsSpawnRate;
     private WaitForSeconds _waitSymbols;
@@ -21,8 +23,6 @@ public class VisualNovelController : MonoBehaviour
 
     private State _SentanceState;
     private int _sentenceIndex;
-
-    private Action OnSentenceCompleted;
 
 
     private void Start()
@@ -47,18 +47,22 @@ public class VisualNovelController : MonoBehaviour
             _IsPlayingScene = true;
             _currentScene = scene;
             _sentenceIndex = -1;
-            NextSentence();
+            NextSentence(_sentenceIndex);
         }
         else
         {
             StopAllCoroutines();
             _currentScene = scene;
             _sentenceIndex = -1;
-            NextSentence();
+            NextSentence(_sentenceIndex);
         }
     }
+    public void StopPlayingScene()
+    {
+        StopAllCoroutines();
+    }
 
-    private void NextSentence()
+    private void NextSentence(int sentenceIndex)
     {
         if (_currentScene.Sentences.Count > ++_sentenceIndex)
         {
@@ -89,7 +93,7 @@ public class VisualNovelController : MonoBehaviour
             {
                 _SentanceState = State.Completed;
                 yield return _waitSentence;
-                OnSentenceCompleted?.Invoke();
+                OnSentenceCompleted?.Invoke(_sentenceIndex);
                 break;
             }
         }
