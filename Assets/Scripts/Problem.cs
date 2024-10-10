@@ -6,6 +6,7 @@ using System;
 
 public class Problem : MonoBehaviour
 {
+    private GameManager gameManager;
     public event Action<Problem> OnProblemFixed;
     [SerializeField] private string targetTag;
 
@@ -20,6 +21,9 @@ public class Problem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject gameManagerObject = GameObject.Find("GameManager");
+        gameManager = gameManagerObject.GetComponent<GameManager>();
+
         myCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -38,6 +42,7 @@ public class Problem : MonoBehaviour
             //Debug.Log("Fixed problem");
             OnProblemFixed?.Invoke(this);
             ChangeSprite(Color.blue);
+            gameManager.StopLowerSatisfaction();
         }
     }
 
@@ -46,6 +51,7 @@ public class Problem : MonoBehaviour
         if (collision.tag == targetTag)
         {
             DisableCollider();
+            gameManager.UnlockLowerSatisfaction();
         }
     }
 
