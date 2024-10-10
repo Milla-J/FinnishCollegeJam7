@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5459576939065019671}
   - component: {fileID: 6300818493263446190}
   - component: {fileID: 4323873971626034389}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TempRobot 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
