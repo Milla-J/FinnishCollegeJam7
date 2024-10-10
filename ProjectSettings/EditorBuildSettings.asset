@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RealGame.unity
     guid: a52433742c8db72468fb530a422302cb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/IlonasScene.unity
     guid: 5ff15e1fc0db79f408b141192eb44fb0
   m_configObjects: {}
