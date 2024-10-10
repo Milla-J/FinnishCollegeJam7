@@ -1709,8 +1709,8 @@ MonoBehaviour:
   - <musicType>k__BackingField: 2
     <clip>k__BackingField: {fileID: 8300000, guid: 46b81010ed206804bad0622dd161dc40, type: 3}
   SFXObjects:
-  - <sfxType>k__BackingField: 0
-    <clip>k__BackingField: {fileID: 8300000, guid: 6f8d292ffcdf7974d8399ef0a69f91e9, type: 3}
+  - <sfxType>k__BackingField: 8
+    <clip>k__BackingField: {fileID: 8300000, guid: 2c7a2949a9a1f754297d20f82858c339, type: 3}
   _musicAudioSource: {fileID: 394352223}
   _SFXAudioSource: {fileID: 377101754}
   _audioMixer: {fileID: 24100000, guid: 6cb59a960bc72204ba317ae66fd5baa3, type: 2}
