@@ -33,6 +33,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
     public void UnpauseGame()
     {
         Time.timeScale = 1;

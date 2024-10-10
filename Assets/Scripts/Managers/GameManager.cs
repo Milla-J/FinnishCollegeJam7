@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LoseScreenController _loseScreenController;
     [SerializeField] private GameplayLoopController _gameplayLoopController;
     [SerializeField] private TutorialController _tutorialController;
+    [SerializeField] private MenuManager _menuController;
+    [SerializeField] private GameObject _pauseMenuPanel;
 
     [Header("Satisfaction changes parameters")]
     [SerializeField] private Slider slider; //Reference to the satisfaction meter
@@ -38,6 +40,12 @@ public class GameManager : MonoBehaviour
         if (satisfaction <= 0)
         {
             _loseScreenController.ShowLoseScreen();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _pauseMenuPanel.SetActive(true);
+            _menuController.PauseGame();
         }
     }
 
