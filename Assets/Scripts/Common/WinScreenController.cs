@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class WinScreenController: MonoBehaviour
+public class WinScreenController : MonoBehaviour
 {
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private TMP_Text _ComplimentText;
@@ -22,3 +22,4 @@ public class WinScreenController: MonoBehaviour
         Time.timeScale = 0; //Stoping the game
     }
 }
+
