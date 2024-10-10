@@ -12,6 +12,9 @@ public class Problem : MonoBehaviour
     [SerializeField] private Sprite newSprite;
      private SpriteRenderer spriteRenderer;
 
+    // Reference to the child object's SpriteRenderer component
+    private SpriteRenderer childSpriteRenderer;
+
     private Collider2D myCollider;
 
     // Start is called before the first frame update
@@ -19,6 +22,13 @@ public class Problem : MonoBehaviour
     {
         myCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        Transform child = this.gameObject.transform.GetChild(0);
+
+        if (child != null )
+        {
+            childSpriteRenderer = child.GetComponent<SpriteRenderer>();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -48,7 +58,13 @@ public class Problem : MonoBehaviour
     private void ChangeSprite(Color newColor)
     {
         //Debug.Log("Changing sprite");
-        spriteRenderer.color = newColor;
-        //spriteRenderer.sprite = newSprite;
+        if (newSprite != null)
+        {
+            childSpriteRenderer.sprite = newSprite;
+        }
+        else
+        {
+            spriteRenderer.color = newColor;
+        }
     }
 }
