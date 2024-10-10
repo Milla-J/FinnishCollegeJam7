@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6458869892333362128}
   - component: {fileID: 8442635308168471812}
-  - component: {fileID: 2521406750375389632}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Hammer
@@ -78,20 +77,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.26, y: 0.64}
   m_EdgeRadius: 0
---- !u!114 &2521406750375389632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4332720000472988215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 004f215ccf3794e45925c1cdcf9d7fee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  targetTag: Bump
 --- !u!1 &5001985504377252245
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +91,7 @@ GameObject:
   - component: {fileID: 2110142698362155845}
   - component: {fileID: 5902223786208844985}
   - component: {fileID: 8726330601876908943}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +208,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4

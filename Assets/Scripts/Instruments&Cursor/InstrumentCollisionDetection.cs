@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 
-public class InstrumentCollisionDetection : MonoBehaviour
+public class InstrumentCollisionDetection : Instrument
 {
     public GameManager gameManager;
 
@@ -15,9 +15,9 @@ public class InstrumentCollisionDetection : MonoBehaviour
         //check if instrument touches wall
         if (other.tag == "Wall")
         {
+            Debug.Log("Instrument touched wall");
             if (collidersInTrigger.Count == 0)
             {
-                //Debug.Log("Instrument touched wall");
                 gameManager.StartCoroutine(gameManager.LowerSatisfaction());
             }
 
@@ -32,6 +32,7 @@ public class InstrumentCollisionDetection : MonoBehaviour
     {
         if (other.tag == "Wall")
         {
+            Debug.Log("Instrument touched wall Exit");
             if (collidersInTrigger.Contains(other))
             {
                 collidersInTrigger.Remove(other);
