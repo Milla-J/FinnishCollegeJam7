@@ -23,6 +23,12 @@ public class TutorialController : MonoBehaviour
 
     private bool _waitForInputToSkip;
 
+    private void Awake()
+    {
+        _toolsOutline.SetActive(false);
+        _conveyerOutline.SetActive(false);
+    }
+
     private void Update()
     {
         if (!_waitForInputToSkip)
@@ -37,9 +43,6 @@ public class TutorialController : MonoBehaviour
 
     public void PlayTutorial()
     {
-        _toolsOutline.SetActive(false);
-        _conveyerOutline.SetActive(false);
-
         _tutorialVisuals.SetActive(true);
         _skipTutorialText.SetActive(true);
 
@@ -52,8 +55,6 @@ public class TutorialController : MonoBehaviour
     }
     private void HandleTutorialEnd()
     {
-        _toolsOutline.SetActive(false);
-        _conveyerOutline.SetActive(false);
         _skipTutorialText.SetActive(false);
 
         OnTutorialEnded?.Invoke();
@@ -61,28 +62,30 @@ public class TutorialController : MonoBehaviour
     }
     private void HandleCompletedScentence(int scentenceCount)
     {
-        if(scentenceCount == 3)
+        if (scentenceCount == 2)
         {
             // Show where are the tools
-            _toolsOutline.SetActive(true);
+            Debug.Log("scentenceCount 3 and making things");
+            _toolsOutline.gameObject.SetActive(true);
             _toolsOutline.transform.position = _toolsOutlineSnap.position;
         }
 
-        if (scentenceCount == 6)
+        else if (scentenceCount == 4)
         {
             // Show where is the conveyer
-            _conveyerOutline.SetActive(true);
+            Debug.Log("scentenceCount 6 and making things");
+            _conveyerOutline.gameObject.SetActive(true);
             _conveyerOutline.transform.position = _conveyerOutlineSnap.position;
         }
 
         else if(_toolsOutline.activeSelf == true)
         {
-            _toolsOutline.SetActive(false);
+            _toolsOutline.gameObject.SetActive(false);
         }
 
         else if (_conveyerOutline.activeSelf == true)
         {
-            _conveyerOutline.SetActive(false);
+            _conveyerOutline.gameObject.SetActive(false);
         }
     }
 }

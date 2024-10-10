@@ -19,9 +19,9 @@ MonoBehaviour:
     Text: Oh, you're a new one... I see. Welcome to ROBO-RUX...
   - Speaker: Boss
     Text: "Let me make this clear... We're just patching up robots here\u2014 I don't
-      get enough cash for anything more."
+      get enough cash for anything more!"
   - Speaker: Boss
-    Text: Use THESE TOOLS to patch the robots... 'splat'... You can right-click on
+    Text: Use THESE TOOLS to patch the robots... 'splat'... You can left-click on
       them to pick 'em up
   - Speaker: Boss
     Text: AND DON'T TOUCH ANYTHING ELSE ON THE ROBOT if you don't want to see me
@@ -30,7 +30,7 @@ MonoBehaviour:
     Text: Robots will come by the conveyor, and you'll have just enough time to fix
       them... I guess.
   - Speaker: Boss
-    Text: Right-click the robot to open it up.
+    Text: Left-click the robot to open it up.
   - Speaker: Boss
     Text: '''Ckouh''... ''CKOUH'''
   - Speaker: Boss
