@@ -1728,10 +1728,22 @@ MonoBehaviour:
   - <musicType>k__BackingField: 3
     <clip>k__BackingField: {fileID: 8300000, guid: ce5b8bd5e3111e94cbb72207551f2484, type: 3}
   SFXObjects:
-  - <sfxType>k__BackingField: 0
-    <clip>k__BackingField: {fileID: 0}
-  _musicAudioSource: {fileID: 377101754}
-  _SFXAudioSource: {fileID: 394352223}
+  - <sfxType>k__BackingField: 8
+    <clip>k__BackingField: {fileID: 8300000, guid: 2c7a2949a9a1f754297d20f82858c339, type: 3}
+  - <sfxType>k__BackingField: 2
+    <clip>k__BackingField: {fileID: 8300000, guid: 843a3035aec56ef45bb47344e8401b7c, type: 3}
+  - <sfxType>k__BackingField: 4
+    <clip>k__BackingField: {fileID: 8300000, guid: 44893e83cc8c8dc42add72bda743bdc8, type: 3}
+  - <sfxType>k__BackingField: 5
+    <clip>k__BackingField: {fileID: 8300000, guid: 08ed59f5d5946824bbe2b2697861d48a, type: 3}
+  - <sfxType>k__BackingField: 7
+    <clip>k__BackingField: {fileID: 8300000, guid: 5223c85380f85f54eb25c4806aa8405e, type: 3}
+  - <sfxType>k__BackingField: 8
+    <clip>k__BackingField: {fileID: 8300000, guid: caba50ff38c30384b81ee90236142305, type: 3}
+  - <sfxType>k__BackingField: 6
+    <clip>k__BackingField: {fileID: 8300000, guid: ad9b5844d503e4b47b3d909e4dd87fe5, type: 3}
+  _musicAudioSource: {fileID: 394352223}
+  _SFXAudioSource: {fileID: 377101754}
   _audioMixer: {fileID: 24100000, guid: 6cb59a960bc72204ba317ae66fd5baa3, type: 2}
   _musicSlider: {fileID: 1736953215}
   _SFXSlider: {fileID: 328186498}
