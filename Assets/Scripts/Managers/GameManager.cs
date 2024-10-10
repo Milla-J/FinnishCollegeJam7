@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private LoseScreenController _loseScreenController;
     [SerializeField] private GameplayLoopController _gameplayLoopController;
+    [SerializeField] private TutorialController _tutorialController;
 
     [Header("Satisfaction changes parameters")]
     [SerializeField] private Slider slider; //Reference to the satisfaction meter
@@ -22,11 +23,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
+
         slider.maxValue = _patienceSize;
         slider.value = _patienceSize;
-        Time.timeScale = 1;
         satisfaction = slider.value;
-        _gameplayLoopController.StartGame();
+
+        _tutorialController.PlayTutorial();
+        _tutorialController.OnTutorialEnded += () => _gameplayLoopController.StartGame();
     }
 
     void Update()

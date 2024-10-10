@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5152296251439265959
+--- !u!1 &7275524596757534269
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,64 +8,59 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6440149591117800696}
-  - component: {fileID: 4946966147096541107}
-  - component: {fileID: 8116731305998177558}
+  - component: {fileID: 945611801661101243}
+  - component: {fileID: 4006019281068539391}
+  - component: {fileID: 5042430014083372009}
   m_Layer: 0
-  m_Name: Gameplay Loop Manager
+  m_Name: TutorialManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6440149591117800696
+--- !u!4 &945611801661101243
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5152296251439265959}
+  m_GameObject: {fileID: 7275524596757534269}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3423448, y: -3.42409, z: 0.062227722}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.69912493, y: 0.5343964, z: 0.44499648}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4946966147096541107
+--- !u!114 &4006019281068539391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5152296251439265959}
+  m_GameObject: {fileID: 7275524596757534269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 747fa25925a30674b929ca1d68e1f07a, type: 3}
+  m_Script: {fileID: 11500000, guid: 90925dbb8a4a58445a70e4918cad804a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _EntitiesPassedBeforeNormal: 3
-  _EntitiesPassedBeforeHard: 6
-  _EasyConveyerSpeed: 4
-  _NormalConveyerSpeed: 5
-  _HardConveyerSpeed: 6
-  _EasySpawnRate: 4
-  _NormalSpawnRate: 3
-  _HardSpawnRate: 2
-  _GagsSpawnChance: 20
-  _RobotsPuller: {fileID: 0}
-  _GagsPool: {fileID: 0}
---- !u!114 &8116731305998177558
+  _tutorialScene: {fileID: 11400000, guid: 0b24d0806f2d4d749ba5f2d7ae308f46, type: 2}
+  _tutorialVisuals: {fileID: 0}
+  _text: {fileID: 0}
+  _speaker: {fileID: 0}
+  _visualNovelController: {fileID: 5042430014083372009}
+--- !u!114 &5042430014083372009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5152296251439265959}
+  m_GameObject: {fileID: 7275524596757534269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5b14475ac3da064fb234ec8cefd1b6b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fc916ff433b5f844bc858fbba25db8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _GameplayLoopManager: {fileID: 4946966147096541107}
+  _symbolsSpawnRate: 0.1
+  _timeAfterSentence: 3
