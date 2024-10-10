@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VisualNovelTesting : MonoBehaviour
 {
-    public StoryScenesController scenesController;
+    public VisualNovelController scenesController;
     public StoryScene storyScene;
 
     private void Start()

@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: StoryScene
   m_EditorClassIdentifier: 
   Sentences:
-  - Speaker: 'Rayan '
-    Text: Hello, hello! Can I take a pen?Hello, hello! Can I take a pen?Hello, hello!
-      Can I take a pen?
-  - Speaker: Rayan
-    Text: K thx bye
+  - Speaker: Boss
+    Text: Hello, hello! Why don't you work? It's 7am, time to start!
+  - Speaker: Boss
+    Text: I am going to sleep
