@@ -24,6 +24,8 @@ MonoBehaviour:
     Text: Use THESE TOOLS to patch the robots... 'splat'... You can left-click on
       them to pick 'em up
   - Speaker: Boss
+    Text: You can rotate 'em with the scroll wheel, to fit 'em into tighter spaces.
+  - Speaker: Boss
     Text: AND DON'T TOUCH ANYTHING ELSE ON THE ROBOT if you don't want to see me
       mad!
   - Speaker: Boss

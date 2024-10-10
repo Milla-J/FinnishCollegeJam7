@@ -8,6 +8,7 @@ public enum SFXType
     ShootSound,
     PickUp,
     PutDown,
+    OpenPopUp,
     FixWithBrush,
     FixWithTape,
     FixWithGlue,

@@ -38,7 +38,7 @@ public class AudioManager : MonoBehaviour
     }
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             Initialize();
@@ -71,22 +71,22 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayAudio(SFXType soundType)
     {
-         try
-         {
-             _SFXAudioSource.clip = _audioClips[soundType.ToString()];
-             _SFXAudioSource.Play();
-         }
+        try
+        {
+            _SFXAudioSource.clip = _audioClips[soundType.ToString()];
+            _SFXAudioSource.Play();
+        }
 
-         catch (Exception e)
-         {
-             if (!_audioClips.ContainsKey(soundType.ToString()))
-             {
-                  Debug.LogWarning("There is no value with " + soundType.ToString() + " key " + " in " + _audioClips);
-             }
-             else
-             {
-                  throw new Exception(e.Message);
-             }
-         }
+        catch (Exception e)
+        {
+            if (!_audioClips.ContainsKey(soundType.ToString()))
+            {
+                Debug.LogWarning("There is no value with " + soundType.ToString() + " key " + " in " + _audioClips);
+            }
+            else
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

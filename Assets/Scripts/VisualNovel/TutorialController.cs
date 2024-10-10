@@ -22,15 +22,21 @@ public class TutorialController : MonoBehaviour
     [SerializeField] private Transform _conveyerOutlineSnap;
 
     private bool _waitForInputToSkip;
+    private bool _isTutorialSkipped;
 
     private void Awake()
     {
         _toolsOutline.SetActive(false);
         _conveyerOutline.SetActive(false);
+        _isTutorialSkipped = false;
     }
 
     private void Update()
     {
+        if (_isTutorialSkipped)
+        {
+            return;
+        }
         if (!_waitForInputToSkip)
             return;
 
@@ -38,6 +44,7 @@ public class TutorialController : MonoBehaviour
         {
             _visualNovelController.StopPlayingScene();
             HandleTutorialEnd();
+            _isTutorialSkipped = true;
         }
     }
 
@@ -73,7 +80,7 @@ public class TutorialController : MonoBehaviour
             _toolsOutline.transform.position = _toolsOutlineSnap.position;
         }
 
-        else if (scentenceCount == 4)
+        else if (scentenceCount == 5)
         {
             // Show where is the conveyer
             Debug.Log("scentenceCount 6 and making things");

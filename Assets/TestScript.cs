@@ -9,19 +9,4 @@ public class TestScript : MonoBehaviour
     {
         AudioManager.instance.PlayAudio(MusicType.MenuMusic);
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            AudioManager.instance.PlayAudio(SFXType.ClickSound);
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            AudioManager.instance.PlayAudio(SFXType.ShootSound);
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            SceneManager.LoadScene("NextScene");
-        }
-    }
 }

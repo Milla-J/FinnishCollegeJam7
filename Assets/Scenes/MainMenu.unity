@@ -1685,7 +1685,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 852110192}
-  - component: {fileID: 852110191}
+  - component: {fileID: 852110193}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -1693,29 +1693,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &852110191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 852110190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 760ec5d70cacc42428ab3490c4ee1194, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicObjects:
-  - <musicType>k__BackingField: 2
-    <clip>k__BackingField: {fileID: 8300000, guid: 46b81010ed206804bad0622dd161dc40, type: 3}
-  SFXObjects:
-  - <sfxType>k__BackingField: 8
-    <clip>k__BackingField: {fileID: 8300000, guid: 2c7a2949a9a1f754297d20f82858c339, type: 3}
-  _musicAudioSource: {fileID: 394352223}
-  _SFXAudioSource: {fileID: 377101754}
-  _audioMixer: {fileID: 24100000, guid: 6cb59a960bc72204ba317ae66fd5baa3, type: 2}
-  _musicSlider: {fileID: 1736953215}
-  _SFXSlider: {fileID: 328186498}
 --- !u!4 &852110192
 Transform:
   m_ObjectHideFlags: 0
@@ -1733,6 +1710,31 @@ Transform:
   - {fileID: 394352222}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &852110193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852110190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760ec5d70cacc42428ab3490c4ee1194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicObjects:
+  - <musicType>k__BackingField: 2
+    <clip>k__BackingField: {fileID: 8300000, guid: 46b81010ed206804bad0622dd161dc40, type: 3}
+  - <musicType>k__BackingField: 3
+    <clip>k__BackingField: {fileID: 8300000, guid: ce5b8bd5e3111e94cbb72207551f2484, type: 3}
+  SFXObjects:
+  - <sfxType>k__BackingField: 0
+    <clip>k__BackingField: {fileID: 0}
+  _musicAudioSource: {fileID: 377101754}
+  _SFXAudioSource: {fileID: 394352223}
+  _audioMixer: {fileID: 24100000, guid: 6cb59a960bc72204ba317ae66fd5baa3, type: 2}
+  _musicSlider: {fileID: 1736953215}
+  _SFXSlider: {fileID: 328186498}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

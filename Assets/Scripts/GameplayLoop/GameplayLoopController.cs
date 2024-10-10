@@ -66,6 +66,7 @@ public class GameplayLoopController : MonoBehaviour
     public void StartGame()
     {
         ConveyerSpeed = _EasyConveyerSpeed;
+        _ConveyorBeltSpeedController.UpdateSpeed(ConveyerSpeed);
         currentSpawnRate = _EasySpawnRate;
 
         IsThisFirstRun = true;
@@ -120,7 +121,7 @@ public class GameplayLoopController : MonoBehaviour
             DifficultyLevel = DifficultyLevels.Normal;
             ConveyerSpeed = _NormalConveyerSpeed;
             currentSpawnRate = _NormalSpawnRate;
-            _ConveyorBeltSpeedController.UpdateSpeed(1f);
+            _ConveyorBeltSpeedController.UpdateSpeed(ConveyerSpeed);
         }
         else if(_RobotsPool.PoolCount == _EntitiesPassedBeforeHard && !passedNormalMode)
         {
@@ -130,7 +131,7 @@ public class GameplayLoopController : MonoBehaviour
             DifficultyLevel = DifficultyLevels.Hard;
             ConveyerSpeed = _HardConveyerSpeed;
             currentSpawnRate = _HardSpawnRate;
-            _ConveyorBeltSpeedController.UpdateSpeed(1.5f);
+            _ConveyorBeltSpeedController.UpdateSpeed(ConveyerSpeed);
         }
     }
 
