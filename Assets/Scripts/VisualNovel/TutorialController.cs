@@ -55,6 +55,9 @@ public class TutorialController : MonoBehaviour
     }
     private void HandleTutorialEnd()
     {
+        _tutorialVisuals.SetActive(false);
+        _skipTutorialText.SetActive(false);
+
         _skipTutorialText.SetActive(false);
 
         OnTutorialEnded?.Invoke();
