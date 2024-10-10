@@ -50,6 +50,8 @@ public class GameplayLoopController : MonoBehaviour
     [Header("Spawn Chance")]
     [SerializeField] private float _GagsSpawnChance;
 
+    [SerializeField] private AnimationSpeedController _ConveyorBeltSpeedController;
+
 
     private float currentSpawnRate;
 
@@ -118,6 +120,7 @@ public class GameplayLoopController : MonoBehaviour
             DifficultyLevel = DifficultyLevels.Normal;
             ConveyerSpeed = _NormalConveyerSpeed;
             currentSpawnRate = _NormalSpawnRate;
+            _ConveyorBeltSpeedController.UpdateSpeed(1f);
         }
         else if(_RobotsPool.PoolCount == _EntitiesPassedBeforeHard && !passedNormalMode)
         {
@@ -127,6 +130,7 @@ public class GameplayLoopController : MonoBehaviour
             DifficultyLevel = DifficultyLevels.Hard;
             ConveyerSpeed = _HardConveyerSpeed;
             currentSpawnRate = _HardSpawnRate;
+            _ConveyorBeltSpeedController.UpdateSpeed(1.5f);
         }
     }
 
