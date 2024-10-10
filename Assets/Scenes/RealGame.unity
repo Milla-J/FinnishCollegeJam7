@@ -2158,7 +2158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3983416734536419286, guid: 04608ec5380220a478ed24ce47d7c2c5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4172164595698215066, guid: 04608ec5380220a478ed24ce47d7c2c5, type: 3}
       propertyPath: m_fontSize
@@ -5027,6 +5027,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca14b7ee325d134ba69c0c45fa59fdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _winScreen: {fileID: 0}
+  _ComplimentText: {fileID: 0}
+  _ScoreText: {fileID: 0}
 --- !u!114 &1341298255
 MonoBehaviour:
   m_ObjectHideFlags: 0
