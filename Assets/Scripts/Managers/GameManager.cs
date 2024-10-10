@@ -6,19 +6,24 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Slider slider; //Reference to the satisfaction meter
-    private float satisfaction; //satisfaction level
-    [SerializeField] private float delay = 0.5f;
-    private bool stopSatisfactionLowering = false;
-
-    public bool fixing = false;
-
-    [SerializeField] private GameObject _loseScreen;
+    [SerializeField] private LoseScreenController _loseScreenController;
     [SerializeField] private GameplayLoopController _gameplayLoopController;
 
-    // Start is called before the first frame update
+    [Header("Satisfaction changes parameters")]
+    [SerializeField] private Slider slider; //Reference to the satisfaction meter
+
+    [SerializeField] private float _patienceSize;
+    [SerializeField] private float _delay = 0.5f;
+    [SerializeField] private float _descreasingStrenght = 0.2f;
+    private float satisfaction; //satisfaction level
+    private bool stopSatisfactionLowering = false;
+
+    //public bool fixing = false;
+
     void Start()
     {
+        slider.maxValue = _patienceSize;
+        slider.value = _patienceSize;
         Time.timeScale = 1;
         satisfaction = slider.value;
         _gameplayLoopController.StartGame();
@@ -28,7 +33,7 @@ public class GameManager : MonoBehaviour
     {
         if (satisfaction <= 0)
         {
-            GameOver();
+            _loseScreenController.ShowLoseScreen();
         }
     }
 
@@ -42,29 +47,28 @@ public class GameManager : MonoBehaviour
     {
         while (!stopSatisfactionLowering)
         {
-            if (!fixing && satisfaction > slider.minValue)
+            //if (!fixing && satisfaction > slider.minValue)
+            //{
+            //    satisfaction -= 0.02f;
+            //    slider.value = satisfaction;
+            //}
+            if (satisfaction > slider.minValue)
             {
-                satisfaction -= 0.02f;
+                satisfaction -= _descreasingStrenght;
                 slider.value = satisfaction;
             }
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(_delay);
         }
 
         stopSatisfactionLowering = false;
     }
 
-    public void AddToSatisfaction()
-    {
-        if (satisfaction < slider.maxValue)
-        {
-            satisfaction += 0.2f;
-            slider.value = satisfaction;
-        }
-    }
-
-    private void GameOver()
-    {
-        Time.timeScale = 0;
-        _loseScreen.SetActive(true);
-    }
+    //public void AddToSatisfaction()
+    //{
+    //    if (satisfaction < slider.maxValue)
+    //    {
+    //        satisfaction += 0.2f;
+    //        slider.value = satisfaction;
+    //    }
+    //}
 }

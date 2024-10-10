@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7339322587574204567}
   - component: {fileID: 8576892350041629334}
   - component: {fileID: 6416642213701954926}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Glue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -259,8 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004f215ccf3794e45925c1cdcf9d7fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  targetTag: Wires
+  _Info: {fileID: 0}
 --- !u!1 &8702013899961640341
 GameObject:
   m_ObjectHideFlags: 0
