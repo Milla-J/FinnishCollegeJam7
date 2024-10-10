@@ -55,15 +55,15 @@ public class GameManager : MonoBehaviour
         stopSatisfactionLowering = true;
     }
 
+    public void UnlockLowerSatisfaction()
+    {
+        stopSatisfactionLowering = false;
+    }
+
     public IEnumerator LowerSatisfaction()
     {
         while (!stopSatisfactionLowering)
         {
-            //if (!fixing && satisfaction > slider.minValue)
-            //{
-            //    satisfaction -= 0.02f;
-            //    slider.value = satisfaction;
-            //}
             if (satisfaction > slider.minValue)
             {
                 satisfaction -= _descreasingStrenght;
@@ -74,13 +74,4 @@ public class GameManager : MonoBehaviour
 
         stopSatisfactionLowering = false;
     }
-
-    //public void AddToSatisfaction()
-    //{
-    //    if (satisfaction < slider.maxValue)
-    //    {
-    //        satisfaction += 0.2f;
-    //        slider.value = satisfaction;
-    //    }
-    //}
 }
