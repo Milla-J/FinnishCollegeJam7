@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4940414581690835913}
   - component: {fileID: 6339954648766874477}
   - component: {fileID: 5979554334535125157}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tape
   m_TagString: Tape
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db09f5fbfcbece943ad299654342cb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Info: {fileID: 0}
+  _Info: {fileID: 11400000, guid: 98ef33c6c1994cd448d77b94091ccf6d, type: 2}
   gameManager: {fileID: 0}
 --- !u!257 &5979554334535125157
 TargetJoint2D:
