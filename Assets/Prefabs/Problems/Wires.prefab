@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2431044558728239560}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.226, y: -0, z: 0}
+  m_LocalPosition: {x: 0.188, y: 0.009, z: 0}
   m_LocalScale: {x: 0.43, y: 0.43, z: 0.43}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 123fb69138b6b9e43885a4a20bb21a87, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2cc7d2587d651c499bdfd84a46a470a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -229,4 +229,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Glue
-  newSprite: {fileID: 21300000, guid: dd5410fdd725bb142afad69251d50dce, type: 3}
+  newSprite: {fileID: 21300000, guid: 9b7dc806ffe82104ea151b3b05e13094, type: 3}
