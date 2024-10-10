@@ -95,6 +95,11 @@ public class Labyrinth: MonoBehaviour
             Destroy(problem.gameObject);
         }
         InstantiatedProblems.Clear();
+
+        foreach (var place in _ProblemsPlaces)
+        {
+            place.InUse = false;
+        }
     }
 
     private void UpdateCompletionPercentage(Problem problemFixed)
