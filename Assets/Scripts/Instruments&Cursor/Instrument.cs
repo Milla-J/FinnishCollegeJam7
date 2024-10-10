@@ -59,6 +59,7 @@ public abstract class Instrument : MonoBehaviour
         var mousePos = Input.mousePosition;
         var worldPos = new Vector2(_MainCamera.ScreenToWorldPoint(mousePos).x, _MainCamera.ScreenToWorldPoint(mousePos).y);
         _targetJoint2D.target = worldPos;
+        Debug.Log("Follow Cursor");
     }
 
     private void Rotate()

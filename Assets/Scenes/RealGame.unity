@@ -4969,7 +4969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5042430014083372009, guid: ecaa4485b9b202944933efd47d371f06, type: 3}
       propertyPath: _timeAfterSentence
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7275524596757534269, guid: ecaa4485b9b202944933efd47d371f06, type: 3}
       propertyPath: m_Name
