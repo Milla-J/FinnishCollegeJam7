@@ -50,6 +50,7 @@ public class Robot : MonoBehaviour
             Debug.LogWarning("WAIT WHERE IS THE LABYRINTH >:(");
         }
         _PopUpController.HandleLabyrinthPopUp(AssosiatedLabyrinth, this);
+        AudioManager.instance.PlayAudio(SFXType.OpenPopUp);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

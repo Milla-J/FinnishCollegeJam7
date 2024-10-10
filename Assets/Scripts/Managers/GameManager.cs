@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
 
         _tutorialController.PlayTutorial();
         _tutorialController.OnTutorialEnded += () => _gameplayLoopController.StartGame();
+
+        AudioManager.instance.PlayAudio(MusicType.GameMusic);
     }
 
     void Update()
@@ -62,6 +64,8 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator LowerSatisfaction()
     {
+        AudioManager.instance.PlayAudio(SFXType.HitWall);
+
         while (!stopSatisfactionLowering)
         {
             if (satisfaction > slider.minValue)
