@@ -6156,8 +6156,8 @@ MonoBehaviour:
   _EntitiesPassedBeforeNormal: 4
   _EntitiesPassedBeforeHard: 9
   _EasyConveyerSpeed: 0.8
-  _NormalConveyerSpeed: 1.8
-  _HardConveyerSpeed: 2.5
+  _NormalConveyerSpeed: 1.5
+  _HardConveyerSpeed: 2.2
   _EasySpawnRate: 10
   _NormalSpawnRate: 6
   _HardSpawnRate: 4
