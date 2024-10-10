@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _pauseMenu;
     private void Start()
     {
         Time.timeScale = 1;
+        if(_pauseMenu != null)
+        {
+            _pauseMenu.SetActive(false);
+        }
     }
 
     public void PlayGame()
