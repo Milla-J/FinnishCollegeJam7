@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SocialPlatforms.Impl;
 
 public enum DifficultyLevels
 {
@@ -145,14 +146,17 @@ public class GameplayLoopController : MonoBehaviour
     private string CalculateCompliment(float score)
     {
         float maxScore = _robotsInGame * _scoreMultiplier;
-        float scorePercentage = (score / maxScore) * 100;         // Calculate the percentage of the achieved score
+        float currentScore = score * _scoreMultiplier;
 
-        // Determine the compliment based on the percentage range
-        if (scorePercentage >= 90f)
+        float bestThreshold = maxScore * 0.9f;
+        float normalThreshold = maxScore * 0.4f;
+
+        // Determine the compliment based on the score compared to thresholds
+        if (currentScore >= bestThreshold)
         {
             return _BestCompliment;
         }
-        else if (scorePercentage >= 50f)
+        else if (currentScore >= normalThreshold)
         {
             return _NormalCompliment;
         }

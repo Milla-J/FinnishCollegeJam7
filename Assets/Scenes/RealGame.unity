@@ -6154,13 +6154,13 @@ MonoBehaviour:
   _RobotsPool: {fileID: 1662211289}
   _GagsPool: {fileID: 0}
   _EntitiesPassedBeforeNormal: 4
-  _EntitiesPassedBeforeHard: 9
-  _EasyConveyerSpeed: 0.8
-  _NormalConveyerSpeed: 1.8
-  _HardConveyerSpeed: 2.5
-  _EasySpawnRate: 10
-  _NormalSpawnRate: 6
-  _HardSpawnRate: 4
+  _EntitiesPassedBeforeHard: 8
+  _EasyConveyerSpeed: 0.4
+  _NormalConveyerSpeed: 0.55
+  _HardConveyerSpeed: 0.65
+  _EasySpawnRate: 15
+  _NormalSpawnRate: 13
+  _HardSpawnRate: 11
   _GagsSpawnChance: 20
   _ConveyorBeltSpeedController: {fileID: 965740367}
 --- !u!4 &1707023809
