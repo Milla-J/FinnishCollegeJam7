@@ -9,6 +9,7 @@ public class PopUpController : MonoBehaviour
     private bool _PopupOpen;
 
     private Labyrinth _OpenedLabyrinth;
+    private Robot _CurrentCurrespondingRobot;
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class PopUpController : MonoBehaviour
     /// Performs opening or closing of the maze-PopUp depending on the current conditions
     /// </summary>
     /// <param name="labyrinthToShow"></param>
-    public void HandleLabyrinthPopUp(Labyrinth labyrinthToShow)
+    public void HandleLabyrinthPopUp(Labyrinth labyrinthToShow, Robot correspondingRobot)
     {
         if (_PopupOpen && _OpenedLabyrinth != labyrinthToShow)
         {
@@ -32,11 +33,58 @@ public class PopUpController : MonoBehaviour
             _OpenedLabyrinth = labyrinthToShow;
             _OpenedLabyrinth.SetActiveTrue();
 
+            _CurrentCurrespondingRobot.RemoveOutline();
+            _CurrentCurrespondingRobot = correspondingRobot;
+            _CurrentCurrespondingRobot.Outline();
+
             _PopupOpen = true;
 
             //add any cool visual effects
         }
         else if(_PopupOpen && _OpenedLabyrinth == labyrinthToShow)
+        {
+            _OpenedLabyrinth.Hide();
+            _OpenedLabyrinth = null;
+            _CurrentCurrespondingRobot.RemoveOutline();
+            _CurrentCurrespondingRobot = null;
+
+            _PopupOpen = false;
+
+            //add any cool visual effects
+        }
+        else if (!_PopupOpen)
+        {
+            _OpenedLabyrinth = labyrinthToShow;
+            _CurrentCurrespondingRobot = correspondingRobot;
+
+            _OpenedLabyrinth.Show();
+            _CurrentCurrespondingRobot.Outline();
+
+            _PopupOpen = true;
+
+            //add any cool visual effects
+        }
+        else
+        {
+            Debug.Log("WTH IS THIS CONDITION?!!!!");
+        }
+    }
+
+    public void HandleRobotOutline(Labyrinth labyrinthToShow, Robot correspondingRobot)
+    {
+        if (_PopupOpen && _OpenedLabyrinth != labyrinthToShow)
+        {
+           
+
+            _OpenedLabyrinth.SetActiveFalse();
+            _OpenedLabyrinth = labyrinthToShow;
+            _OpenedLabyrinth.SetActiveTrue();
+
+            _PopupOpen = true;
+
+            //add any cool visual effects
+        }
+        else if (_PopupOpen && _OpenedLabyrinth == labyrinthToShow)
         {
             _OpenedLabyrinth.Hide();
             _OpenedLabyrinth = null;
@@ -59,7 +107,6 @@ public class PopUpController : MonoBehaviour
             Debug.Log("WTH IS THIS CONDITION?!!!!");
         }
     }
-
     public void CloseIfMatches(Labyrinth labyrinth)
     {
         if(_OpenedLabyrinth == labyrinth)

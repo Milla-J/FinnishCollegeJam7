@@ -9,8 +9,14 @@ public class Robot : MonoBehaviour
     public event Action<Robot> OnExitConveyer;
     public Labyrinth AssosiatedLabyrinth { get; private set; }
 
-    //Move parameters
-    private Transform _Start;
+    [Header("Robot Sprite")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite _regularSprite;
+    [SerializeField] private Sprite _outlineSprite;
+
+
+   //Move parameter
+   private Transform _Start;
     private Transform _End;
 
     private GameplayLoopController _GameplayLoopController;
@@ -18,6 +24,7 @@ public class Robot : MonoBehaviour
     private PopUpController _PopUpController;
 
     private bool _isLabyrinthAssigned = false;
+    private bool _isOutlined = false;
 
 
    public void Instantiate(GameplayLoopController gameplayLoopController, LabyrinthPool labyrinthController, PopUpController popUpController, Transform startMovementPoint, Transform endMovementPoint)
@@ -28,6 +35,8 @@ public class Robot : MonoBehaviour
 
         _Start = startMovementPoint;
         _End = endMovementPoint;
+
+        spriteRenderer.sprite = _regularSprite;
 
         gameObject.SetActive(false);
     }
@@ -40,7 +49,7 @@ public class Robot : MonoBehaviour
         {
             Debug.LogWarning("WAIT WHERE IS THE LABYRINTH >:(");
         }
-        _PopUpController.HandleLabyrinthPopUp(AssosiatedLabyrinth);
+        _PopUpController.HandleLabyrinthPopUp(AssosiatedLabyrinth, this);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -80,4 +89,21 @@ public class Robot : MonoBehaviour
             yield return null;
         }
     }
+
+    public void Outline() => spriteRenderer.sprite = _outlineSprite;
+    public void RemoveOutline() => spriteRenderer.sprite = _regularSprite;
+
+    //public void OutlineHandler()
+    //{
+    //    if (_isOutlined)
+    //    {
+    //        _isOutlined = false;
+    //        spriteRenderer.sprite = _regularSprite;
+    //    }
+    //    else
+    //    {
+    //        _isOutlined = true;
+    //        spriteRenderer.sprite = _outlineSprite;
+    //    }
+    //}
 }
