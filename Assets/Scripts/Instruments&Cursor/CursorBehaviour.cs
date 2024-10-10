@@ -29,6 +29,8 @@ public class CursorBehaviour : MonoBehaviour
             try
             {
                 Debug.Log("GOT!");
+                AudioManager.instance.PlayAudio(SFXType.PickUp);
+
                 var instrument = hit.transform.GetComponent<InstrumentHolder>().AssociatedInstrument;
                 HandleInstrumentChoose(instrument);
             }

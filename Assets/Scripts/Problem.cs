@@ -43,6 +43,25 @@ public class Problem : MonoBehaviour
             OnProblemFixed?.Invoke(this);
             ChangeSprite(Color.blue);
             gameManager.StopLowerSatisfaction();
+
+            switch (other.tag)
+            {
+                case "Brush":
+                    AudioManager.instance.PlayAudio(SFXType.Brush);
+                    break;
+                case "Glue":
+                    AudioManager.instance.PlayAudio(SFXType.Glue);
+                    break;
+                case "Hammer":
+                    AudioManager.instance.PlayAudio(SFXType.Hammer);
+                    break;
+                case "Tape":
+                    AudioManager.instance.PlayAudio(SFXType.Tape);
+                    break;
+                default:
+                    Debug.Log("No sound found");
+                    break;
+            }
         }
     }
 
