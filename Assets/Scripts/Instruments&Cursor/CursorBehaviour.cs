@@ -29,14 +29,20 @@ public class CursorBehaviour : MonoBehaviour
             try
             {
                 Debug.Log("GOT!");
-                AudioManager.instance.PlayAudio(SFXType.PickUp);
-
+                try
+                {
+                    AudioManager.instance.PlayAudio(SFXType.PickUp);
+                }
+                catch(System.Exception ex)
+                {
+                    Debug.LogWarning(ex);
+                }
                 var instrument = hit.transform.GetComponent<InstrumentHolder>().AssociatedInstrument;
                 HandleInstrumentChoose(instrument);
             }
-            catch
+            catch (System.Exception ex)
             {
-                Debug.LogWarning("Can't get Instrument component from " + hit.transform.name);
+                Debug.LogWarning("Can't get Instrument component from " + hit.transform.name + "     Exeption: " + ex);
             }
         }
     }
