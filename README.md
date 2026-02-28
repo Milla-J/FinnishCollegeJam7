@@ -1,6 +1,6 @@
 # **🎮 Description:**
 ### **Project made for the Finnish Game Jam #7** (game's itch.io page: [click here](https://theio.itch.io/robo-rux))
-### **<ins> Winner of a Finnish Game Jam Awards 2024 </ins>, Duct Tape Fixes All Award**
+#### Winner of a Finnish Game Jam Awards 2024, Duct Tape Fixes All Award**
 
 The game is a time-constrained repair simulator: the pleayer is a factory worker, who needs to identify defects in robots and fix them. They do it by using repair tools and the dexterity their own hands, without touching the robot's walls, all while the robot is moving along the conveyor belt.
 Every defect requires a specific tool. Using the wrong tool has no effect.
