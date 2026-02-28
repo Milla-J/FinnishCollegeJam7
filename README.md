@@ -1,10 +1,8 @@
 # **🎮 Description:**
 ### **Project made for the Finnish Game Jam #7** (game's itch.io page: [click here](https://theio.itch.io/robo-rux))
 #### **Winner of a Finnish Game Jam Awards 2024, Duct Tape Fixes All Award**
-The game is a time-constrained repair simulator: the pleayer is a factory worker, who needs to identify defects in robots and fix them. They do it by using repair tools and the dexterity their own hands, without touching the robot's walls, all while the robot is moving along the conveyor belt.
-Every defect requires a specific tool. Using the wrong tool has no effect.
-
-You play as a technician tasked with restoring malfunctioning robots using a limited set of tools. Repairs don’t need to be perfect — they just need to work.
+The game is a time-constrained repair simulator. You play as a technician who is tasked with restoring malfunctioning robots using a limited set of tools. You must use your own dexterity and avoid touching the robot's walls. All of this takes place while the robot moves along the conveyor belt.
+Each defect requires a specific tool. Using the wrong tool has no effect.
 
 ## Core Gameplay Loop:
 1️⃣ Select a damaged robot.
@@ -16,9 +14,7 @@ Repeat under time pressure.
 
 Failure conditions are spatial (touching walls) and temporal (running out of time).
 
-
 ## ⚡️ The project extensively applies OOP, including:
-
 - **Encapsulation** – Data hiding and controlled access through private fields and public properties (e.g., `MusicObject` and `SFXObject` use [SerializeField] with private backing and public getters to control audio metadata access)
 - **Composition** – Combining multiple objects to build complex functionality (e.g., `Labyrinth` contains lists of `ProblemPlace` and `Problem` objects; `GameplayLoopController` orchestrates `RobotsPool`, `LabyrinthPool`, `RobotsExit` and manages game flow; `PopUpController` coordinates `Robot` and `Labyrinth` interactions for UI state)
 - **Inheritance through MonoBehaviour** – All game-specific behavior extends Unity's `MonoBehaviour` (e.g., `TutorialController`, `VisualNovelController`, `MenuManager` inherit from MonoBehaviour, enabling lifecycle management and scene integration)
