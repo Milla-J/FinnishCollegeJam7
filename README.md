@@ -1,3 +1,22 @@
+## 🎮 Description:
+Project made for the Finnish Game Jam #7
+<ins> Winner of a Finnish Game Jam Awards 2024 </ins>, Duct Tape Fixes All Award
+
+The game is a time-constrained repair simulator: the pleayer is a factory worker, who needs to identify defects in robots and fix them. They do it by using repair tools and the dexterity their own hands, without touching the robot's walls, all while the robot is moving along the conveyor belt.
+Every defect requires a specific tool. Using the wrong tool has no effect.
+
+You play as a technician tasked with restoring malfunctioning robots using a limited set of tools. Repairs don’t need to be perfect — they just need to work.
+## Core Gameplay Loop:
+1️⃣ Select a damaged robot.
+2️⃣ Identify visible faults.
+3️⃣ Select an appropriate tool.
+4️⃣Position and rotate the tool correctly.
+4️⃣ Apply repair.
+Repeat under time pressure.
+
+Failure conditions are spatial (touching walls) and temporal (running out of time).
+
+
 ## ⚡️ The project extensively applies OOP, including:
 
 - **Encapsulation** – Data hiding and controlled access through private fields and public properties (e.g., `MusicObject` and `SFXObject` use [SerializeField] with private backing and public getters to control audio metadata access)
